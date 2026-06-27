@@ -235,6 +235,11 @@ async def on_message(message):
 
     content = message.content.strip()
 
+    is_allowed_role = any(
+        role.id == ALLOWED_ROLE_ID
+        for role in message.author.roles
+    )
+
     # Delete stickers/files/embeds/empty messages
     if (
         message.attachments
@@ -242,14 +247,8 @@ async def on_message(message):
         or message.embeds
         or not content
     ):
-        try:
-            await message.delete()
-        except Exception as e:
-            print(f"Delete failed: {e}")
-        return
-
-    # Same user twice
-    if message.author.id == state["last_user_id"]:
+        if is_allowed_role:
+            return
         try:
             await message.delete()
         except Exception as e:
@@ -258,6 +257,16 @@ async def on_message(message):
 
     # Must be integer
     if not content.isdigit():
+        if is_allowed_role:
+            return
+        try:
+            await message.delete()
+        except Exception as e:
+            print(f"Delete failed: {e}")
+        return
+
+    # Same user twice
+    if message.author.id == state["last_user_id"]:
         try:
             await message.delete()
         except Exception as e:
@@ -275,7 +284,7 @@ async def on_message(message):
     number = int(content)
 
     # Must be next number according to saved state
-    print(number,state['last_number'])
+    print(number, state["last_number"])
     if number != state["last_number"] + 1:
         try:
             await message.delete()
