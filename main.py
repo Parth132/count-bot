@@ -1,0 +1,319 @@
+import discord
+from discord import app_commands
+import json
+import os
+import time
+from dotenv import load_dotenv  # Add this import line
+
+load_dotenv()
+TOKEN = os.getenv("TOKEN")
+
+CONFIG_FILE = "config.json"
+STATE_FILE = "count_state.json"
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = discord.Client(intents=intents)
+tree = app_commands.CommandTree(client)
+
+# ----------------------------
+# Config
+# ----------------------------
+
+def load_config():
+    if not os.path.exists(CONFIG_FILE):
+        return {
+            "counting_channel_id": 0
+        }
+
+    with open(CONFIG_FILE, "r") as f:
+        return json.load(f)
+
+
+def save_config():
+    with open(CONFIG_FILE, "w") as f:
+        json.dump(config, f, indent=4)
+
+
+# ----------------------------
+# State
+# ----------------------------
+
+def load_state():
+    if not os.path.exists(STATE_FILE):
+        return {
+            "last_number": 0,
+            "last_user_id": None
+        }
+
+    with open(STATE_FILE, "r") as f:
+        return json.load(f)
+
+
+def save_state():
+    with open(STATE_FILE, "w") as f:
+        json.dump(state, f, indent=4)
+
+
+config = load_config()
+state = load_state()
+
+
+# ----------------------------
+# Startup
+# ----------------------------
+
+@client.event
+async def on_ready():
+    await tree.sync()
+
+    print(f"Logged in as {client.user}")
+    print(f"Counting channel: {config['counting_channel_id']}")
+    print(f"Current count: {state['last_number']}")
+
+    channel_id = config["counting_channel_id"]
+
+
+    print(channel_id)
+    if channel_id == 0:
+        return
+
+
+    channel = client.get_channel(channel_id)
+
+    if not channel:
+        return
+
+    # Cleanup messages sent while bot was offline
+    async for msg in channel.history(limit=100):
+
+        if msg.author.bot:
+            continue
+
+        content = msg.content.strip()
+
+
+        # If message is not a valid integer, delete it
+        if not content.isdigit():
+            try:
+                await msg.delete()
+            except Exception as e:
+                print(f"Startup cleanup delete failed: {e}")
+            continue
+
+        number = int(content)
+
+        # Stop cleanup once we reach a count that is
+        # less than or equal to the saved count
+        if number <= state["last_number"]:
+            continue
+
+        # Delete any number greater than the saved count
+        try:
+            await msg.delete()
+        except Exception as e:
+            print(f"Startup cleanup delete failed: {e}")
+
+
+# ----------------------------
+# Commands
+# ----------------------------
+
+@tree.command(
+    name="set-counting-channel",
+    description="Set the counting channel"
+)
+@app_commands.checks.has_permissions(administrator=True)
+async def set_counting_channel(
+    interaction: discord.Interaction,
+    channel: discord.TextChannel
+):
+    config["counting_channel_id"] = channel.id
+    save_config()
+
+    await interaction.response.send_message(
+        f"✅ Counting channel set to {channel.mention}",
+        ephemeral=True
+    )
+
+
+@tree.command(
+    name="check-last-count",
+    description="Show the last valid count"
+)
+async def check_last_count(interaction: discord.Interaction):
+
+    await interaction.response.send_message(
+        f"Current saved count: **{state['last_number']}**\n"
+        f"Next valid number: **{state['last_number'] + 1}**",
+        ephemeral=True
+    )
+
+
+ALLOWED_ROLE_ID = 1377336728100012102  # Replace with your role ID
+
+@tree.command(
+    name="set-count-value",
+    description="Manually set the current count and optionally the last user"
+)
+async def set_count(
+    interaction: discord.Interaction,
+    count: int,
+    message_count: int,
+    user: discord.Member | None = None
+):
+    if ALLOWED_ROLE_ID not in [role.id for role in interaction.user.roles]:
+        await interaction.response.send_message(
+            "❌ You are not allowed to use this command.",
+            ephemeral=True
+        )
+        return
+
+    await interaction.response.defer(ephemeral=True)
+
+    state["last_number"] = count
+    state["last_user_id"] = user.id if user else None
+    save_state()
+
+    deleted = 0
+
+    channel_id = config["counting_channel_id"]
+
+    if channel_id:
+        channel = client.get_channel(channel_id)
+
+        if channel:
+            async for msg in channel.history(limit=message_count):
+
+                if msg.author.bot:
+                    continue
+
+                content = msg.content.strip()
+
+                if not content.isdigit():
+                    continue
+
+                try:
+                    number = int(content)
+
+                    if number > count:
+                        await msg.delete()
+                        deleted += 1
+
+                except Exception as e:
+                    print(f"Delete failed: {e}")
+
+    await interaction.followup.send(
+        f"✅ Count updated.\n"
+        f"Last number: **{count}**\n"
+        f"Last user: {user.mention if user else 'None'}\n"
+        f"Next valid number: **{count + 1}**\n"
+        f"Deleted **{deleted}** messages with values greater than **{count}** "
+        f"from the last **{message_count}** messages checked.",
+        ephemeral=True
+    )
+
+
+# ----------------------------
+# Message Handling
+# ----------------------------
+
+@client.event
+async def on_message(message):
+
+    if message.author.bot:
+        return
+
+    channel_id = config["counting_channel_id"]
+
+    if channel_id == 0:
+        return
+
+    if message.channel.id != channel_id:
+        return
+
+    content = message.content.strip()
+
+    # Delete stickers/files/embeds/empty messages
+    if (
+        message.attachments
+        or message.stickers
+        or message.embeds
+        or not content
+    ):
+        try:
+            await message.delete()
+        except Exception as e:
+            print(f"Delete failed: {e}")
+        return
+
+    # Same user twice
+    if message.author.id == state["last_user_id"]:
+        try:
+            await message.delete()
+        except Exception as e:
+            print(f"Delete failed: {e}")
+        return
+
+    # Must be integer
+    if not content.isdigit():
+        try:
+            await message.delete()
+        except Exception as e:
+            print(f"Delete failed: {e}")
+        return
+
+    # Reject leading zeros
+    if str(int(content)) != content:
+        try:
+            await message.delete()
+        except Exception as e:
+            print(f"Delete failed: {e}")
+        return
+
+    number = int(content)
+
+    # Must be next number according to saved state
+    print(number,state['last_number'])
+    if number != state["last_number"] + 1:
+        try:
+            await message.delete()
+        except Exception as e:
+            print(f"Delete failed: {e}")
+        return
+
+    # Valid count
+    state["last_number"] = number
+    state["last_user_id"] = message.author.id
+
+    save_state()
+
+    print(
+        f"Accepted count {number} "
+        f"from {message.author}"
+    )
+
+
+# ----------------------------
+# Edit Protection
+# ----------------------------
+
+@client.event
+async def on_message_edit(before, after):
+
+    channel_id = config["counting_channel_id"]
+
+    if channel_id == 0:
+        return
+
+    if after.channel.id != channel_id:
+        return
+
+    try:
+        await after.delete()
+    except Exception as e:
+        print(f"Edit delete failed: {e}")
+
+
+client.run(TOKEN)
