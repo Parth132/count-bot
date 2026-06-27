@@ -3,7 +3,7 @@ from discord import app_commands
 import json
 import os
 import time
-from dotenv import load_dotenv  # Add this import line
+from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
@@ -297,6 +297,26 @@ async def on_message(message):
     state["last_user_id"] = message.author.id
 
     save_state()
+
+    # Milestone messages
+    if number % 10000 == 0:
+        await message.add_reaction("🏆")
+        await message.channel.send(
+            f"🏆 **MILESTONE ACHIEVED!** 🏆\n"
+            f"We've reached **{number:,}**! Incredible work everyone!"
+        )
+
+    elif number % 1000 == 0:
+        await message.add_reaction("💪🏻")
+        await message.channel.send(
+            f"**{number:,}** reached! Keep the count going! 💪🏻"
+        )
+
+    elif number % 100 == 0:
+        await message.add_reaction("💯")
+        await message.channel.send(
+            f"Nice! **{number:,}** reached already! Keep it up! 💯"
+        )
 
     print(
         f"Accepted count {number} "
