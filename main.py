@@ -4,12 +4,17 @@ import json
 import os
 import time
 from dotenv import load_dotenv
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
 
 CONFIG_FILE = "config.json"
 STATE_FILE = "count_state.json"
+STAT_FILE = "stat_count.json"
+
+ALLOWED_ROLE_ID = 1377336728100012102
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -54,6 +59,21 @@ def load_state():
 def save_state():
     with open(STATE_FILE, "w") as f:
         json.dump(state, f, indent=4)
+
+def load_stats():
+    if not os.path.exists(STAT_FILE):
+        return {}
+
+    with open(STAT_FILE, "r") as f:
+        return json.load(f)
+
+
+def save_stats():
+    with open(STAT_FILE, "w") as f:
+        json.dump(stats, f, indent=4)
+
+
+stats = load_stats()
 
 
 config = load_config()
@@ -120,6 +140,9 @@ async def on_ready():
 # Commands
 # ----------------------------
 
+# set-counting-channel
+# ----------------------------
+
 @tree.command(
     name="set-counting-channel",
     description="Set the counting channel"
@@ -137,6 +160,8 @@ async def set_counting_channel(
         ephemeral=True
     )
 
+# check-last-count
+# ----------------------------
 
 @tree.command(
     name="check-last-count",
@@ -150,8 +175,8 @@ async def check_last_count(interaction: discord.Interaction):
         ephemeral=True
     )
 
-
-ALLOWED_ROLE_ID = 1377336728100012102  # Replace with your role ID
+# set-count-value
+# ----------------------------
 
 @tree.command(
     name="set-count-value",
@@ -212,6 +237,60 @@ async def set_count(
         f"Deleted **{deleted}** messages with values greater than **{count}** "
         f"from the last **{message_count}** messages checked.",
         ephemeral=True
+    )
+
+# server-leaderboard
+# ----------------------------
+
+@tree.command(
+    name="server-leaderboard",
+    description="Show the counting leaderboard."
+)
+async def stat_check(
+    interaction: discord.Interaction,
+    count: app_commands.Range[int, 1, 50] = 3
+):
+
+    if not stats:
+        await interaction.response.send_message(
+            "No statistics available.",
+            ephemeral=True
+        )
+        return
+
+    if ALLOWED_ROLE_ID not in [role.id for role in interaction.user.roles]:
+        await interaction.response.send_message(
+            "❌ You are not allowed to use this command.",
+            ephemeral=True
+        )
+        return
+
+    leaderboard = sorted(
+        stats.items(),
+        key=lambda x: x[1]["total_count"],
+        reverse=True
+    )[:count]
+
+    lines = ["## 📊 Counting Leaderboard\n"]
+
+    for index, (user_id, data) in enumerate(leaderboard, start=1):
+
+        member = interaction.guild.get_member(int(user_id))
+
+        username = (
+            member.display_name
+            if member
+            else data["username"]
+        )
+
+        lines.append(
+            f"### #{index} {username}\n"
+            f"**Total Accepted Counts:** {data['total_count']}\n"
+            f"**Last Active:** {data['last_active_date']}\n"
+        )
+
+    await interaction.response.send_message(
+        "\n".join(lines)
     )
 
 
@@ -297,6 +376,27 @@ async def on_message(message):
     state["last_user_id"] = message.author.id
 
     save_state()
+
+    # ----------------------------
+    # Update User Stats
+    # ----------------------------
+
+    user_id = str(message.author.id)
+
+    if user_id not in stats:
+        stats[user_id] = {
+            "username": message.author.display_name,
+            "total_count": 0,
+            "last_active_date": ""
+        }
+
+    stats[user_id]["username"] = message.author.display_name
+    stats[user_id]["total_count"] += 1
+    stats[user_id]["last_active_date"] = (
+    datetime.now(ZoneInfo("Asia/Kolkata"))
+    .strftime("%d %b %Y %I:%M %p IST"))
+
+    save_stats()
 
     # Milestone messages
     if number % 10000 == 0:
