@@ -239,6 +239,58 @@ async def set_count(
         ephemeral=True
     )
 
+# delete-last-messages
+# ----------------------------
+
+@tree.command(
+name="delete-last-messages",
+description="Delete the last N messages from the counting channel."
+)
+async def delete_last_messages(
+    interaction: discord.Interaction,
+    message_count: app_commands.Range[int, 1, 100]
+):
+    if ALLOWED_ROLE_ID not in [role.id for role in interaction.user.roles]:
+        await interaction.response.send_message(
+            "❌ You are not allowed to use this command.",
+            ephemeral=True
+        )
+        return
+
+    await interaction.response.defer(ephemeral=True)
+
+    channel_id = config["counting_channel_id"]
+
+    if channel_id == 0:
+        await interaction.followup.send(
+            "❌ Counting channel is not configured.",
+            ephemeral=True
+        )
+        return
+
+    channel = client.get_channel(channel_id)
+
+    if channel is None:
+        await interaction.followup.send(
+            "❌ Could not find the counting channel.",
+            ephemeral=True
+        )
+        return
+
+    deleted = 0
+
+    async for msg in channel.history(limit=message_count):
+        try:
+            await msg.delete()
+            deleted += 1
+        except Exception as e:
+            print(f"Delete failed: {e}")
+
+    await interaction.followup.send(
+        f"✅ Deleted **{deleted}** message(s).",
+        ephemeral=True
+    )
+
 # server-leaderboard
 # ----------------------------
 
