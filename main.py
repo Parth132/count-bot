@@ -4,8 +4,9 @@ import json
 import os
 import time
 from dotenv import load_dotenv
-from datetime import datetime
+from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
+from typing import Literal
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
@@ -79,6 +80,29 @@ stats = load_stats()
 config = load_config()
 state = load_state()
 
+
+# ---------------------------
+# Helper Functions
+# ---------------------------
+
+def ensure_user_stats(user_id: str, username: str):
+    if user_id not in stats:
+        stats[user_id] = {}
+
+    user = stats[user_id]
+
+    # Backwards compatibility
+    user.setdefault("username", username)
+    user.setdefault("total_count", 0)
+    user.setdefault("last_active_date", "")
+    user.setdefault("last_active_day", "")
+    user.setdefault("cur_streak", 1)
+    user.setdefault("max_streak", 1)
+
+    # Always keep username up to date
+    user["username"] = username
+
+    return user
 
 # ----------------------------
 # Startup
@@ -298,9 +322,10 @@ async def delete_last_messages(
     name="server-leaderboard",
     description="Show the counting leaderboard."
 )
-async def stat_check(
+async def server_leaderboard(
     interaction: discord.Interaction,
-    count: app_commands.Range[int, 1, 50] = 3
+    sort_by: Literal['total count', 'max streak'],
+    count: app_commands.Range[int, 1, 50] = 3,
 ):
 
     if not stats:
@@ -319,7 +344,7 @@ async def stat_check(
 
     leaderboard = sorted(
         stats.items(),
-        key=lambda x: x[1]["total_count"],
+        key=lambda x: x[1]['_'.join(sort_by.split())],
         reverse=True
     )[:count]
 
@@ -335,11 +360,20 @@ async def stat_check(
             else data["username"]
         )
 
+        data = ensure_user_stats(
+        user_id,
+        username
+        )
+
         lines.append(
             f"### #{index} {username}\n"
             f"**Total Accepted Counts:** {data['total_count']}\n"
+            f"**Current Streak:** 🔥 {data['cur_streak']}\n"
+            f"**Best Streak:** 🏆 {data['max_streak']}\n"
             f"**Last Active:** {data['last_active_date']}\n"
         )
+
+    save_stats()
 
     await interaction.response.send_message(
         "\n".join(lines)
@@ -435,18 +469,54 @@ async def on_message(message):
 
     user_id = str(message.author.id)
 
-    if user_id not in stats:
-        stats[user_id] = {
-            "username": message.author.display_name,
-            "total_count": 0,
-            "last_active_date": ""
-        }
+    user = ensure_user_stats(
+        user_id,
+        message.author.display_name
+    )
 
-    stats[user_id]["username"] = message.author.display_name
-    stats[user_id]["total_count"] += 1
-    stats[user_id]["last_active_date"] = (
-    datetime.now(ZoneInfo("Asia/Kolkata"))
-    .strftime("%d %b %Y %I:%M %p IST"))
+    today = datetime.now(ZoneInfo("Asia/Kolkata")).date()
+    today_str = today.isoformat()
+
+    # Increment accepted count
+    user["total_count"] += 1
+
+    last_day = user["last_active_day"]
+
+    if last_day:
+
+        last_day = datetime.strptime(
+            last_day,
+            "%Y-%m-%d"
+        ).date()
+
+        if today == last_day:
+            # Already counted today
+            pass
+
+        elif today == last_day + timedelta(days=1):
+            # Consecutive day
+            user["cur_streak"] += 1
+
+        else:
+            # Streak broken
+            user["max_streak"] = max(
+                user["max_streak"],
+                user["cur_streak"]
+            )
+
+            user["cur_streak"] = 1
+
+    user["max_streak"] = max(
+        user["max_streak"],
+        user["cur_streak"]
+    )
+
+    user["last_active_day"] = today_str
+
+    user["last_active_date"] = (
+        datetime.now(ZoneInfo("Asia/Kolkata"))
+        .strftime("%d %b %Y %I:%M %p")
+    )
 
     save_stats()
 
