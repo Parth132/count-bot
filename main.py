@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from typing import Literal
+from discord import Embed, Color
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
@@ -16,6 +17,7 @@ STATE_FILE = "count_state.json"
 STAT_FILE = "stat_count.json"
 
 ALLOWED_ROLE_ID = 1377336728100012102
+ALLOWED_ROLE_ID_LIST = [924956391695863848,863827603701104690,1377336728100012102]
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -103,6 +105,13 @@ def ensure_user_stats(user_id: str, username: str):
     user["username"] = username
 
     return user
+
+def check_permissions(roles):
+    for role in roles:
+        if role.id in ALLOWED_ROLE_ID_LIST:return True
+    return False
+
+
 
 # ----------------------------
 # Startup
@@ -209,15 +218,11 @@ async def check_last_count(interaction: discord.Interaction):
 async def set_count(
     interaction: discord.Interaction,
     count: int,
-    message_count: int,
+    message_count: int = 0,
     user: discord.Member | None = None
 ):
-    if ALLOWED_ROLE_ID not in [role.id for role in interaction.user.roles]:
-        await interaction.response.send_message(
-            "❌ You are not allowed to use this command.",
-            ephemeral=True
-        )
-        return
+
+    if not check_permissions(interaction.user.roles):return
 
     await interaction.response.defer(ephemeral=True)
 
@@ -274,12 +279,7 @@ async def delete_last_messages(
     interaction: discord.Interaction,
     message_count: app_commands.Range[int, 1, 100]
 ):
-    if ALLOWED_ROLE_ID not in [role.id for role in interaction.user.roles]:
-        await interaction.response.send_message(
-            "❌ You are not allowed to use this command.",
-            ephemeral=True
-        )
-        return
+    if not check_permissions(interaction.user.roles):return
 
     await interaction.response.defer(ephemeral=True)
 
@@ -320,12 +320,11 @@ async def delete_last_messages(
 
 @tree.command(
     name="server-leaderboard",
-    description="Show the counting leaderboard."
+    description="Shows the top counting members."
 )
 async def server_leaderboard(
     interaction: discord.Interaction,
-    sort_by: Literal['total count', 'max streak'],
-    count: app_commands.Range[int, 1, 50] = 3,
+    count: app_commands.Range[int, 1, 10] = 5
 ):
 
     if not stats:
@@ -335,22 +334,27 @@ async def server_leaderboard(
         )
         return
 
-    if ALLOWED_ROLE_ID not in [role.id for role in interaction.user.roles]:
-        await interaction.response.send_message(
-            "❌ You are not allowed to use this command.",
-            ephemeral=True
-        )
-        return
-
     leaderboard = sorted(
         stats.items(),
-        key=lambda x: x[1]['_'.join(sort_by.split())],
+        key=lambda x: x[1]["total_count"],
         reverse=True
     )[:count]
 
-    lines = ["## 📊 Counting Leaderboard\n"]
+    embed = discord.Embed(
+        title="🏆 Server Counting Leaderboard",
+        description="Top members contributing to the counting game.",
+        color=discord.Color.gold()
+    )
 
-    for index, (user_id, data) in enumerate(leaderboard, start=1):
+    medals = {
+        1: "🥇",
+        2: "🥈",
+        3: "🥉"
+    }
+
+    leaderboard_text = ""
+
+    for position, (user_id, data) in enumerate(leaderboard, start=1):
 
         member = interaction.guild.get_member(int(user_id))
 
@@ -360,25 +364,39 @@ async def server_leaderboard(
             else data["username"]
         )
 
-        data = ensure_user_stats(
-        user_id,
-        username
+        data = ensure_user_stats(user_id, username)
+
+        rank = medals.get(position, f"`#{position}`")
+
+        leaderboard_text += (
+            f"{rank} **{username}**\n"
+            f"> 📈 **Accepted Counts:** `{data['total_count']}`\n"
+            f"> 🔥 **Current Streak:** `{data['cur_streak']}` days\n"
+            f"> 🏆 **Best Streak:** `{data['max_streak']}` days\n"
+            f"> 🕒 **Last Active:** {data['last_active_date']}\n\n"
         )
 
-        lines.append(
-            f"### #{index} {username}\n"
-            f"**Total Accepted Counts:** {data['total_count']}\n"
-            f"**Current Streak:** 🔥 {data['cur_streak']}\n"
-            f"**Best Streak:** 🏆 {data['max_streak']}\n"
-            f"**Last Active:** {data['last_active_date']}\n"
-        )
+    # embed.add_field(
+    #     name="Leaderboard",
+    #     value=leaderboard_text,
+    #     inline=False
+    # )
+    embed.description = leaderboard_text
+
+    total_counts = sum(
+        user["total_count"]
+        for user in stats.values()
+    )
+
+    embed.set_footer(
+        text=f"Tracking {len(stats)} members • {total_counts:,} accepted counts"
+    )
+
+    embed.timestamp = datetime.now(ZoneInfo("Asia/Kolkata"))
 
     save_stats()
 
-    await interaction.response.send_message(
-        "\n".join(lines)
-    )
-
+    await interaction.response.send_message(embed=embed)
 
 # ----------------------------
 # Message Handling
