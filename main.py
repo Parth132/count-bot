@@ -8,10 +8,13 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from typing import Literal
 from discord import Embed, Color
+import asyncio
+import traceback
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
 
+DAILY_STATS_FILE = "daily_stats.json"
 CONFIG_FILE = "config.json"
 STATE_FILE = "count_state.json"
 STAT_FILE = "stat_count.json"
@@ -76,6 +79,26 @@ def save_stats():
         json.dump(stats, f, indent=4)
 
 
+# -------------------------
+# Daily stats
+# ------------------------
+
+def load_daily_stats():
+    if not os.path.exists(DAILY_STATS_FILE):
+        return {}
+
+    with open(DAILY_STATS_FILE, "r") as f:
+        return json.load(f)
+
+
+def save_daily_stats():
+    with open(DAILY_STATS_FILE, "w") as f:
+        json.dump(daily_stats, f, indent=4)
+
+
+daily_stats = load_daily_stats()
+
+
 stats = load_stats()
 
 
@@ -98,8 +121,8 @@ def ensure_user_stats(user_id: str, username: str):
     user.setdefault("total_count", 0)
     user.setdefault("last_active_date", "")
     user.setdefault("last_active_day", "")
-    user.setdefault("cur_streak", 1)
-    user.setdefault("max_streak", 1)
+    user.setdefault("cur_streak", 0)
+    user.setdefault("max_streak", 0)
 
     # Always keep username up to date
     user["username"] = username
@@ -110,6 +133,90 @@ def check_permissions(roles):
     for role in roles:
         if role.id in ALLOWED_ROLE_ID_LIST:return True
     return False
+
+def cleanup_daily_stats():
+
+    today = datetime.now(
+        ZoneInfo("Asia/Kolkata")
+    ).date()
+
+    keys_to_delete = []
+
+    for key in daily_stats:
+
+        day = datetime.strptime(
+            key,
+            "%d%m%Y"
+        ).date()
+
+        if (today - day).days > 30:
+            keys_to_delete.append(key)
+
+    for key in keys_to_delete:
+        del daily_stats[key]
+
+    save_daily_stats()
+
+
+def build_server_leaderboard(guild: discord.Guild, count: int = 5):
+
+    leaderboard = sorted(
+        stats.items(),
+        key=lambda x: x[1]["total_count"],
+        reverse=True
+    )[:count]
+
+    embed = discord.Embed(
+        title="🏆 Server Counting Leaderboard",
+        description="Top members contributing to the counting game.",
+        color=discord.Color.gold()
+    )
+
+    medals = {
+        1: "🥇",
+        2: "🥈",
+        3: "🥉"
+    }
+
+    leaderboard_text = ""
+
+    for position, (user_id, data) in enumerate(leaderboard, start=1):
+
+        member = guild.get_member(int(user_id))
+
+        username = (
+            member.display_name
+            if member
+            else data["username"]
+        )
+
+        data = ensure_user_stats(user_id, username)
+
+        rank = medals.get(position, f"`#{position}`")
+
+        leaderboard_text += (
+            f"{rank} **{username}**\n"
+            f"> 📈 **Accepted Counts:** `{data['total_count']}`\n"
+            f"> 🔥 **Current Streak:** `{data['cur_streak']}` days\n"
+            f"> 🏆 **Best Streak:** `{data['max_streak']}` days\n"
+            f"> 🕒 **Last Active:** {data['last_active_date']}\n\n"
+        )
+
+    embed.description = leaderboard_text
+
+    total_counts = sum(
+        user["total_count"]
+        for user in stats.values()
+    )
+
+    embed.set_footer(
+        text=f"Tracking {len(stats)} members • {total_counts:,} accepted counts"
+    )
+
+    embed.timestamp = datetime.now(ZoneInfo("Asia/Kolkata"))
+
+    save_stats()
+    return embed
 
 
 
@@ -137,6 +244,8 @@ async def on_ready():
 
     if not channel:
         return
+
+    cleanup_daily_stats()
 
     # Cleanup messages sent while bot was offline
     async for msg in channel.history(limit=100):
@@ -167,6 +276,11 @@ async def on_ready():
             await msg.delete()
         except Exception as e:
             print(f"Startup cleanup delete failed: {e}")
+
+    if not hasattr(client, "daily_report_started"):
+        client.daily_report_started = True
+        client.loop.create_task(daily_report_scheduler())
+
 
 
 # ----------------------------
@@ -397,68 +511,107 @@ async def server_leaderboard(
             ephemeral=True
         )
         return
+    
+    embed = build_server_leaderboard(
+    interaction.guild,
+    count
+    )
+    await interaction.response.send_message(embed=embed)
 
-    leaderboard = sorted(
-        stats.items(),
-        key=lambda x: x[1]["total_count"],
-        reverse=True
-    )[:count]
 
-    embed = discord.Embed(
-        title="🏆 Server Counting Leaderboard",
-        description="Top members contributing to the counting game.",
-        color=discord.Color.gold()
+async def post_daily_report():
+
+    print('--------------------------------------')
+
+    yesterday = (
+        datetime.now(ZoneInfo("Asia/Kolkata")).date()
+        - timedelta(days=1)
     )
 
-    medals = {
-        1: "🥇",
-        2: "🥈",
-        3: "🥉"
-    }
+    key = yesterday.strftime("%d%m%Y")
 
-    leaderboard_text = ""
+    if key not in daily_stats:
+        return
 
-    for position, (user_id, data) in enumerate(leaderboard, start=1):
+    day = daily_stats[key]
 
-        member = interaction.guild.get_member(int(user_id))
+    # channel = client.get_channel(config["counting_channel_id"])
+    channel = await client.fetch_channel(config["counting_channel_id"])
 
-        username = (
-            member.display_name
-            if member
-            else data["username"]
+    if channel is None:
+        return
+
+    top = sorted(
+        day["users"].values(),
+        key=lambda x: x["count"],
+        reverse=True
+    )[:3]
+
+    embed = discord.Embed(
+        title="📊 Daily Counting Report",
+        description=f"Statistics for **{yesterday.strftime('%d %b %Y')}**",
+        color=discord.Color.blurple()
+    )
+
+    embed.add_field(
+    name="📈 Total Accepted Counts",
+    value=f"**{day['total_accepted']:,}**",
+    inline=True
+    )
+
+    embed.add_field(
+        name="👥 Active Participants",
+        value=f"**{len(day['users'])}**",
+        inline=True
+    )
+
+    # Force a new row
+    embed.add_field(
+        name="\u200b",
+        value="\u200b",
+        inline=False
+    )
+
+    embed.add_field(
+        name="🌱 New Participants",
+        value=f"**{len(day['new_participants'])}**",
+        inline=True
+    )
+
+    embed.add_field(
+        name="🔄 Returning Counters",
+        value=f"**{len(day['returning_users'])}**",
+        inline=True
+    )
+
+    leaderboard = ""
+
+    medals = ["🥇", "🥈", "🥉"]
+
+    for i, user in enumerate(top):
+        leaderboard += (
+            f"{medals[i]} **{user['username']}** — "
+            f"`{user['count']}` counts\n"
         )
 
-        data = ensure_user_stats(user_id, username)
+    if leaderboard == "":
+        leaderboard = "No counts yesterday."
 
-        rank = medals.get(position, f"`#{position}`")
-
-        leaderboard_text += (
-            f"{rank} **{username}**\n"
-            f"> 📈 **Accepted Counts:** `{data['total_count']}`\n"
-            f"> 🔥 **Current Streak:** `{data['cur_streak']}` days\n"
-            f"> 🏆 **Best Streak:** `{data['max_streak']}` days\n"
-            f"> 🕒 **Last Active:** {data['last_active_date']}\n\n"
-        )
-
-    # embed.add_field(
-    #     name="Leaderboard",
-    #     value=leaderboard_text,
-    #     inline=False
-    # )
-    embed.description = leaderboard_text
-
-    total_counts = sum(
-        user["total_count"]
-        for user in stats.values()
+    embed.add_field(
+        name="🏆 Top Counters",
+        value=leaderboard,
+        inline=False
     )
 
     embed.set_footer(
-        text=f"Tracking {len(stats)} members • {total_counts:,} accepted counts"
+        text="See you tomorrow for another recap! 🚀"
     )
 
     embed.timestamp = datetime.now(ZoneInfo("Asia/Kolkata"))
 
-    save_stats()
+    print(channel.id)
+    print(channel.name)
+    print(config["counting_channel_id"])
 
     await interaction.response.send_message(embed=embed)
 
@@ -551,6 +704,8 @@ async def on_message(message):
 
     user_id = str(message.author.id)
 
+    is_new_user = user_id not in stats
+
     user = ensure_user_stats(
         user_id,
         message.author.display_name
@@ -559,7 +714,6 @@ async def on_message(message):
     today = datetime.now(ZoneInfo("Asia/Kolkata")).date()
     today_str = today.isoformat()
 
-    # Increment accepted count
     user["total_count"] += 1
 
     last_day = user["last_active_day"]
@@ -571,22 +725,29 @@ async def on_message(message):
             "%Y-%m-%d"
         ).date()
 
-        if today == last_day:
+        if today_date == last_day:
             # Already counted today
             pass
 
-        elif today == last_day + timedelta(days=1):
+        elif today_date == last_day + timedelta(days=1):
             # Consecutive day
             user["cur_streak"] += 1
 
         else:
-            # Streak broken
+            # Returned after missing one or more days
+            if user_id not in today_stats["returning_users"]:
+                today_stats["returning_users"].append(user_id)
+
             user["max_streak"] = max(
                 user["max_streak"],
                 user["cur_streak"]
             )
 
             user["cur_streak"] = 1
+
+    else:
+        # First ever accepted count
+        user["cur_streak"] = 1
 
     user["max_streak"] = max(
         user["max_streak"],
@@ -601,6 +762,7 @@ async def on_message(message):
     )
 
     save_stats()
+    save_daily_stats()
 
     # Milestone messages
     if number % 10000 == 0:
