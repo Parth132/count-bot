@@ -315,6 +315,70 @@ async def delete_last_messages(
         ephemeral=True
     )
 
+# user-stats
+# ----------------------------
+
+@tree.command(
+    name="user-stats",
+    description="Count stats for user"
+)
+async def user_stats(
+    interaction: discord.Interaction,
+    user: discord.Member | None = None
+):
+
+    if user is None:
+        user = interaction.user
+
+    user_id = str(user.id)
+
+    data = ensure_user_stats(
+        user_id,
+        user.display_name
+    )
+
+    # save_stats()
+
+    embed = discord.Embed(
+        title="📊 Counting Statistics",
+        description=f"Statistics for **{user.display_name}**",
+        color=discord.Color.blue()
+    )
+
+    embed.set_thumbnail(url=user.display_avatar.url)
+
+    embed.add_field(
+        name="📈 Accepted Counts",
+        value=f"`{data['total_count']:,}`",
+        inline=True
+    )
+
+    embed.add_field(
+        name="🔥 Current Streak",
+        value=f"`{data['cur_streak']}` day(s)",
+        inline=True
+    )
+
+    embed.add_field(
+        name="🏆 Best Streak",
+        value=f"`{data['max_streak']}` day(s)",
+        inline=True
+    )
+
+    embed.add_field(
+        name="🕒 Last Active",
+        value=data["last_active_date"] or "Never",
+        inline=False
+    )
+
+    embed.set_footer(
+    text="Counting Bot • Keep the streak alive! :greed:"
+    )
+
+    embed.timestamp = datetime.now(ZoneInfo("Asia/Kolkata"))
+
+    await interaction.response.send_message(embed=embed)
+
 # server-leaderboard
 # ----------------------------
 
