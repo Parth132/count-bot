@@ -613,7 +613,47 @@ async def post_daily_report():
     print(channel.name)
     print(config["counting_channel_id"])
 
-    await interaction.response.send_message(embed=embed)
+    perms = channel.permissions_for(channel.guild.me)
+
+    print("Administrator:", perms.administrator)
+    print("Send Messages:", perms.send_messages)
+    print("Embed Links:", perms.embed_links)
+    print("View Channel:", perms.view_channel)
+    print("Read History:", perms.read_message_history)
+    print("Use External Emojis:", perms.use_external_emojis)
+
+    await channel.send(embed=embed)
+
+async def daily_report_scheduler():
+
+    await client.wait_until_ready()
+
+    while not client.is_closed():
+
+        now = datetime.now(ZoneInfo("Asia/Kolkata"))
+
+        next_run = now.replace(
+            hour=9,
+            minute=30,
+            second=0,
+            microsecond=0
+        )
+
+        if now >= next_run:
+            next_run += timedelta(days=1)
+        print(now,next_run)
+        wait_seconds = (next_run - now).total_seconds()
+
+        await asyncio.sleep(wait_seconds)
+
+        try:
+            channel = await client.fetch_channel(config["counting_channel_id"])
+            embed = build_server_leaderboard(channel.guild,5)
+            await channel.send(embed=embed)
+            await post_daily_report()
+            print("Daily report posted.")
+        except Exception:
+            traceback.print_exc()
 
 # ----------------------------
 # Message Handling
@@ -711,8 +751,43 @@ async def on_message(message):
         message.author.display_name
     )
 
-    today = datetime.now(ZoneInfo("Asia/Kolkata")).date()
-    today_str = today.isoformat()
+    today_date = datetime.now(ZoneInfo("Asia/Kolkata")).date()
+    today_str = today_date.isoformat()
+    today_key = today_date.strftime("%d%m%Y")
+
+    # ----------------------------
+    # Daily Stats
+    # ----------------------------
+
+    if today_key not in daily_stats:
+
+        daily_stats[today_key] = {
+            "total_accepted": 0,
+            "new_participants": [],
+            "returning_users": [],
+            "users": {}
+        }
+
+    today_stats = daily_stats[today_key]
+
+    today_stats["total_accepted"] += 1
+
+    if user_id not in today_stats["users"]:
+
+        today_stats["users"][user_id] = {
+            "username": message.author.display_name,
+            "count": 0
+        }
+
+    today_stats["users"][user_id]["username"] = message.author.display_name
+    today_stats["users"][user_id]["count"] += 1
+
+    if is_new_user and user_id not in today_stats["new_participants"]:
+        today_stats["new_participants"].append(user_id)
+
+    # ----------------------------
+    # Lifetime Stats
+    # ----------------------------
 
     user["total_count"] += 1
 
