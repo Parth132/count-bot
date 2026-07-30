@@ -157,6 +157,104 @@ def cleanup_daily_stats():
 
     save_daily_stats()
 
+def build_daily_stats_embed(
+    guild: discord.Guild,
+    day: int = 0,
+    count: int = 3
+):
+
+    target_date = (
+        datetime.now(ZoneInfo("Asia/Kolkata")).date()
+        - timedelta(days=day)
+    )
+
+    key = target_date.strftime("%d%m%Y")
+
+    if key not in daily_stats:
+        return None
+
+    data = daily_stats[key]
+
+    embed = discord.Embed(
+        title="📊 Daily Counting Statistics",
+        description=f"Statistics for **{target_date.strftime('%d %b %Y')}**",
+        color=discord.Color.blurple()
+    )
+
+    embed.add_field(
+        name="📈 Total Accepted Counts",
+        value=f"**{data['total_accepted']:,}**",
+        inline=True
+    )
+
+    embed.add_field(
+        name="👥 Active Participants",
+        value=f"**{len(data['users'])}**",
+        inline=True
+    )
+
+    embed.add_field(
+        name="\u200b",
+        value="\u200b",
+        inline=False
+    )
+
+    embed.add_field(
+        name="🌱 New Participants",
+        value=f"**{len(data['new_participants'])}**",
+        inline=True
+    )
+
+    embed.add_field(
+        name="🔄 Returning Counters",
+        value=f"**{len(data['returning_users'])}**",
+        inline=True
+    )
+
+    top_users = sorted(
+        data["users"].items(),
+        key=lambda x: x[1]["count"],
+        reverse=True
+    )[:count]
+
+    medals = ["🥇", "🥈", "🥉"]
+
+    leaderboard = ""
+
+    for i, (user_id, info) in enumerate(top_users):
+
+        member = guild.get_member(int(user_id))
+
+        username = (
+            member.display_name
+            if member
+            else info["username"]
+        )
+
+        medal = medals[i] if i < 3 else f"**#{i+1}**"
+
+        leaderboard += (
+            f"{medal} {username}\n"
+            f"└ Accepted Counts: **{info['count']}**\n\n"
+        )
+
+    if leaderboard == "":
+        leaderboard = "No data available."
+
+    embed.add_field(
+        name="🏆 Daily Leaderboard",
+        value=leaderboard,
+        inline=False
+    )
+
+    embed.set_footer(
+        text="Keep counting! 🚀"
+    )
+
+    embed.timestamp = datetime.now(ZoneInfo("Asia/Kolkata"))
+
+    return embed
+
 
 def build_server_leaderboard(guild: discord.Guild, count: int = 5):
 
@@ -518,6 +616,37 @@ async def server_leaderboard(
     )
     await interaction.response.send_message(embed=embed)
 
+# daily-stats
+# ----------------------------
+
+@tree.command(
+    name="daily-stats",
+    description="View today's or yesterday's counting statistics."
+)
+@app_commands.describe(
+    day="0 = Today, 1 = Yesterday",
+    count="Number of users to display (1-10)"
+)
+async def daily_stats_command(
+    interaction: discord.Interaction,
+    day: app_commands.Range[int, 0, 1] = 0,
+    count: app_commands.Range[int, 1, 10] = 3
+):
+
+    embed = build_daily_stats_embed(
+        interaction.guild,
+        day,
+        count
+    )
+
+    if embed is None:
+        await interaction.response.send_message(
+            "No statistics found for that day.",
+            ephemeral=True
+        )
+        return
+
+    await interaction.response.send_message(embed=embed)
 
 async def post_daily_report():
 
@@ -535,7 +664,6 @@ async def post_daily_report():
 
     day = daily_stats[key]
 
-    # channel = client.get_channel(config["counting_channel_id"])
     channel = await client.fetch_channel(config["counting_channel_id"])
 
     if channel is None:
@@ -648,6 +776,12 @@ async def daily_report_scheduler():
 
         try:
             channel = await client.fetch_channel(config["counting_channel_id"])
+            embed = build_daily_stats_embed(
+                channel.guild,
+                day=1,
+                count=3
+            )
+            if embed:await channel.send(embed=embed)
             embed = build_server_leaderboard(channel.guild,5)
             await channel.send(embed=embed)
             await post_daily_report()
@@ -882,6 +1016,7 @@ async def on_message_edit(before, after):
 
     try:
         await after.delete()
+        print('a message was edited and has been deleted.')
     except Exception as e:
         print(f"Edit delete failed: {e}")
 
