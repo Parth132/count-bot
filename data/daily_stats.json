@@ -1,0 +1,15 @@
+{
+    "01082026": {
+        "total_accepted": 1,
+        "new_participants": [
+            "42"
+        ],
+        "returning_users": [],
+        "users": {
+            "42": {
+                "username": "Alice",
+                "count": 1
+            }
+        }
+    }
+}
