@@ -110,6 +110,45 @@ state = load_state()
 # Helper Functions
 # ---------------------------
 
+def refresh_user_streak(user: dict, today_date: datetime.date | None = None) -> bool:
+    if not user.get("last_active_day"):
+        return False
+
+    if today_date is None:
+        today_date = datetime.now(ZoneInfo("Asia/Kolkata")).date()
+
+    try:
+        last_day = datetime.strptime(
+            user["last_active_day"],
+            "%Y-%m-%d"
+        ).date()
+    except ValueError:
+        return False
+
+    if today_date == last_day:
+        return False
+
+    if today_date > last_day + timedelta(days=1):
+        user["cur_streak"] = 0
+        return True
+
+    return False
+
+
+def refresh_streaks_for_all_users(today_date: datetime.date | None = None) -> None:
+    if today_date is None:
+        today_date = datetime.now(ZoneInfo("Asia/Kolkata")).date()
+
+    changed = False
+
+    for user in stats.values():
+        if refresh_user_streak(user, today_date):
+            changed = True
+
+    if changed:
+        save_stats()
+
+
 def ensure_user_stats(user_id: str, username: str):
     if user_id not in stats:
         stats[user_id] = {}
@@ -127,12 +166,33 @@ def ensure_user_stats(user_id: str, username: str):
     # Always keep username up to date
     user["username"] = username
 
+    if refresh_user_streak(user):
+        save_stats()
+
     return user
 
 def check_permissions(roles):
     for role in roles:
-        if role.id in ALLOWED_ROLE_ID_LIST:return True
+        if role.id in ALLOWED_ROLE_ID_LIST:
+            return True
     return False
+
+
+async def send_personal_milestone(message, user, streak):
+    milestones = []
+
+    if user["total_count"] in {500, 1000, 5000, 10000}:
+        milestones.append(
+            f"🎉 {user['username']} just reached {user['total_count']:,} accepted counts!"
+        )
+
+    if streak in {7, 14, 30, 60, 100}:
+        milestones.append(
+            f"🥳 {user['username']} reached a {streak}-day streak!"
+        )
+
+    if milestones:
+        await message.channel.send("\n".join(milestones))
 
 def cleanup_daily_stats():
 
@@ -344,6 +404,7 @@ async def on_ready():
         return
 
     cleanup_daily_stats()
+    refresh_streaks_for_all_users()
 
     # Cleanup messages sent while bot was offline
     async for msg in channel.history(limit=100):
@@ -417,6 +478,42 @@ async def check_last_count(interaction: discord.Interaction):
     await interaction.response.send_message(
         f"Current saved count: **{state['last_number']}**\n"
         f"Next valid number: **{state['last_number'] + 1}**",
+        ephemeral=True
+    )
+
+# send-message
+# ----------------------------
+
+@tree.command(
+    name="send-message",
+    description="Send a message from the bot in the counting channel"
+)
+async def send_message(
+    interaction: discord.Interaction,
+    message: str,
+    channel: discord.TextChannel | None = None
+):
+    if not check_permissions(interaction.user.roles):
+        await interaction.response.send_message(
+            "❌ You do not have permission to use this command.",
+            ephemeral=True
+        )
+        return
+
+    target_channel = channel or interaction.channel
+
+    if target_channel is None:
+        await interaction.response.send_message(
+            "❌ Could not determine a target channel.",
+            ephemeral=True
+        )
+        return
+
+    await interaction.response.defer(ephemeral=True)
+    await target_channel.send(message)
+
+    await interaction.followup.send(
+        f"✅ Message sent to {target_channel.mention}.",
         ephemeral=True
     )
 
@@ -775,6 +872,7 @@ async def daily_report_scheduler():
         await asyncio.sleep(wait_seconds)
 
         try:
+            refresh_streaks_for_all_users()
             channel = await client.fetch_channel(config["counting_channel_id"])
             embed = build_daily_stats_embed(
                 channel.guild,
@@ -952,10 +1050,13 @@ async def on_message(message):
                 user["cur_streak"]
             )
 
-            user["cur_streak"] = 1
+            user["cur_streak"] = 0
 
     else:
         # First ever accepted count
+        user["cur_streak"] = 1
+
+    if user["cur_streak"] == 0:
         user["cur_streak"] = 1
 
     user["max_streak"] = max(
@@ -972,6 +1073,8 @@ async def on_message(message):
 
     save_stats()
     save_daily_stats()
+
+    await send_personal_milestone(message, user, user["cur_streak"])
 
     # Milestone messages
     if number % 10000 == 0:
