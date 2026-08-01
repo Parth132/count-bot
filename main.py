@@ -1,15 +1,17 @@
-import discord
-from discord import app_commands
-import json
+import asyncio
 import os
-import time
-from dotenv import load_dotenv
+import traceback
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
-from typing import Literal
-from discord import Embed, Color
-import asyncio
-import traceback
+
+import discord
+from discord import app_commands
+from dotenv import load_dotenv
+
+from helpers import config as config_helpers
+from helpers import counting as counting_helpers
+from helpers import stats as stats_helpers
+from helpers.milestones import send_milestone
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
@@ -33,18 +35,13 @@ tree = app_commands.CommandTree(client)
 # ----------------------------
 
 def load_config():
-    if not os.path.exists(CONFIG_FILE):
-        return {
-            "counting_channel_id": 0
-        }
-
-    with open(CONFIG_FILE, "r") as f:
-        return json.load(f)
+    global config
+    config = config_helpers.load_config()
+    return config
 
 
 def save_config():
-    with open(CONFIG_FILE, "w") as f:
-        json.dump(config, f, indent=4)
+    return config_helpers.save_config(config)
 
 
 # ----------------------------
@@ -52,31 +49,23 @@ def save_config():
 # ----------------------------
 
 def load_state():
-    if not os.path.exists(STATE_FILE):
-        return {
-            "last_number": 0,
-            "last_user_id": None
-        }
-
-    with open(STATE_FILE, "r") as f:
-        return json.load(f)
+    global state
+    state = config_helpers.load_state()
+    return state
 
 
 def save_state():
-    with open(STATE_FILE, "w") as f:
-        json.dump(state, f, indent=4)
+    return config_helpers.save_state(state)
+
 
 def load_stats():
-    if not os.path.exists(STAT_FILE):
-        return {}
-
-    with open(STAT_FILE, "r") as f:
-        return json.load(f)
+    global stats
+    stats = config_helpers.load_stats()
+    return stats
 
 
 def save_stats():
-    with open(STAT_FILE, "w") as f:
-        json.dump(stats, f, indent=4)
+    return config_helpers.save_stats(stats)
 
 
 # -------------------------
@@ -84,24 +73,17 @@ def save_stats():
 # ------------------------
 
 def load_daily_stats():
-    if not os.path.exists(DAILY_STATS_FILE):
-        return {}
-
-    with open(DAILY_STATS_FILE, "r") as f:
-        return json.load(f)
+    global daily_stats
+    daily_stats = config_helpers.load_daily_stats()
+    return daily_stats
 
 
 def save_daily_stats():
-    with open(DAILY_STATS_FILE, "w") as f:
-        json.dump(daily_stats, f, indent=4)
+    return config_helpers.save_daily_stats(daily_stats)
 
 
 daily_stats = load_daily_stats()
-
-
 stats = load_stats()
-
-
 config = load_config()
 state = load_state()
 
@@ -150,21 +132,15 @@ def refresh_streaks_for_all_users(today_date: datetime.date | None = None) -> No
 
 
 def ensure_user_stats(user_id: str, username: str):
-    if user_id not in stats:
-        stats[user_id] = {}
+    return stats_helpers.ensure_user_stats(stats, user_id, username)
 
-    user = stats[user_id]
 
-    # Backwards compatibility
-    user.setdefault("username", username)
-    user.setdefault("total_count", 0)
-    user.setdefault("last_active_date", "")
-    user.setdefault("last_active_day", "")
-    user.setdefault("cur_streak", 0)
-    user.setdefault("max_streak", 0)
+def get_configured_channel():
+    channel_id = config["counting_channel_id"]
+    if channel_id == 0:
+        return None
+    return client.get_channel(channel_id)
 
-    # Always keep username up to date
-    user["username"] = username
 
     if refresh_user_streak(user):
         save_stats()
@@ -176,6 +152,33 @@ def check_permissions(roles):
         if role.id in ALLOWED_ROLE_ID_LIST:
             return True
     return False
+async def delete_message_safely(message):
+    try:
+        await message.delete()
+    except Exception as e:
+        print(f"Delete failed: {e}")
+
+
+def build_user_stats_embed(user, data):
+    embed = discord.Embed(
+        title="📊 Counting Statistics",
+        description=f"Statistics for **{user.display_name}**",
+        color=discord.Color.blue(),
+    )
+
+    embed.set_thumbnail(url=user.display_avatar.url)
+    embed.add_field(name="📈 Accepted Counts", value=f"`{data['total_count']:,}`", inline=True)
+    embed.add_field(name="🔥 Current Streak", value=f"`{data['cur_streak']}` day(s)", inline=True)
+    embed.add_field(name="🏆 Best Streak", value=f"`{data['max_streak']}` day(s)", inline=True)
+    embed.add_field(name="🕒 Last Active", value=data["last_active_date"] or "Never", inline=False)
+    embed.set_footer(text="Counting Bot • Keep the streak alive! :greed:")
+    embed.timestamp = datetime.now(ZoneInfo("Asia/Kolkata"))
+    return embed
+
+
+def check_permissions(roles):
+    return stats_helpers.check_permissions(roles, ALLOWED_ROLE_ID_LIST)
+
 
 
 async def send_personal_milestone(message, user, streak):
@@ -195,186 +198,39 @@ async def send_personal_milestone(message, user, streak):
         await message.channel.send("\n".join(milestones))
 
 def cleanup_daily_stats():
+    return stats_helpers.cleanup_daily_stats(daily_stats)
 
-    today = datetime.now(
-        ZoneInfo("Asia/Kolkata")
-    ).date()
-
-    keys_to_delete = []
-
-    for key in daily_stats:
-
-        day = datetime.strptime(
-            key,
-            "%d%m%Y"
-        ).date()
-
-        if (today - day).days > 30:
-            keys_to_delete.append(key)
-
-    for key in keys_to_delete:
-        del daily_stats[key]
-
-    save_daily_stats()
 
 def build_daily_stats_embed(
     guild: discord.Guild,
     day: int = 0,
     count: int = 3
 ):
-
-    target_date = (
-        datetime.now(ZoneInfo("Asia/Kolkata")).date()
-        - timedelta(days=day)
+    return stats_helpers.build_daily_stats_embed(
+        guild,
+        daily_stats,
+        day,
+        count
     )
-
-    key = target_date.strftime("%d%m%Y")
-
-    if key not in daily_stats:
-        return None
-
-    data = daily_stats[key]
-
-    embed = discord.Embed(
-        title="📊 Daily Counting Statistics",
-        description=f"Statistics for **{target_date.strftime('%d %b %Y')}**",
-        color=discord.Color.blurple()
-    )
-
-    embed.add_field(
-        name="📈 Total Accepted Counts",
-        value=f"**{data['total_accepted']:,}**",
-        inline=True
-    )
-
-    embed.add_field(
-        name="👥 Active Participants",
-        value=f"**{len(data['users'])}**",
-        inline=True
-    )
-
-    embed.add_field(
-        name="\u200b",
-        value="\u200b",
-        inline=False
-    )
-
-    embed.add_field(
-        name="🌱 New Participants",
-        value=f"**{len(data['new_participants'])}**",
-        inline=True
-    )
-
-    embed.add_field(
-        name="🔄 Returning Counters",
-        value=f"**{len(data['returning_users'])}**",
-        inline=True
-    )
-
-    top_users = sorted(
-        data["users"].items(),
-        key=lambda x: x[1]["count"],
-        reverse=True
-    )[:count]
-
-    medals = ["🥇", "🥈", "🥉"]
-
-    leaderboard = ""
-
-    for i, (user_id, info) in enumerate(top_users):
-
-        member = guild.get_member(int(user_id))
-
-        username = (
-            member.display_name
-            if member
-            else info["username"]
-        )
-
-        medal = medals[i] if i < 3 else f"**#{i+1}**"
-
-        leaderboard += (
-            f"{medal} {username}\n"
-            f"└ Accepted Counts: **{info['count']}**\n\n"
-        )
-
-    if leaderboard == "":
-        leaderboard = "No data available."
-
-    embed.add_field(
-        name="🏆 Daily Leaderboard",
-        value=leaderboard,
-        inline=False
-    )
-
-    embed.set_footer(
-        text="Keep counting! 🚀"
-    )
-
-    embed.timestamp = datetime.now(ZoneInfo("Asia/Kolkata"))
-
-    return embed
 
 
 def build_server_leaderboard(guild: discord.Guild, count: int = 5):
-
-    leaderboard = sorted(
-        stats.items(),
-        key=lambda x: x[1]["total_count"],
-        reverse=True
-    )[:count]
-
-    embed = discord.Embed(
-        title="🏆 Server Counting Leaderboard",
-        description="Top members contributing to the counting game.",
-        color=discord.Color.gold()
+    return stats_helpers.build_server_leaderboard(
+        guild,
+        stats,
+        count
     )
 
-    medals = {
-        1: "🥇",
-        2: "🥈",
-        3: "🥉"
-    }
 
-    leaderboard_text = ""
-
-    for position, (user_id, data) in enumerate(leaderboard, start=1):
-
-        member = guild.get_member(int(user_id))
-
-        username = (
-            member.display_name
-            if member
-            else data["username"]
-        )
-
-        data = ensure_user_stats(user_id, username)
-
-        rank = medals.get(position, f"`#{position}`")
-
-        leaderboard_text += (
-            f"{rank} **{username}**\n"
-            f"> 📈 **Accepted Counts:** `{data['total_count']}`\n"
-            f"> 🔥 **Current Streak:** `{data['cur_streak']}` days\n"
-            f"> 🏆 **Best Streak:** `{data['max_streak']}` days\n"
-            f"> 🕒 **Last Active:** {data['last_active_date']}\n\n"
-        )
-
-    embed.description = leaderboard_text
-
-    total_counts = sum(
-        user["total_count"]
-        for user in stats.values()
+def build_daily_report_embed(
+    guild: discord.Guild,
+    day_offset: int = 1,
+):
+    return stats_helpers.build_daily_report_embed(
+        guild,
+        daily_stats,
+        day_offset
     )
-
-    embed.set_footer(
-        text=f"Tracking {len(stats)} members • {total_counts:,} accepted counts"
-    )
-
-    embed.timestamp = datetime.now(ZoneInfo("Asia/Kolkata"))
-
-    save_stats()
-    return embed
 
 
 
@@ -398,7 +254,7 @@ async def on_ready():
         return
 
 
-    channel = client.get_channel(channel_id)
+    channel = get_configured_channel()
 
     if not channel:
         return
@@ -541,31 +397,28 @@ async def set_count(
 
     deleted = 0
 
-    channel_id = config["counting_channel_id"]
+    channel = get_configured_channel()
 
-    if channel_id:
-        channel = client.get_channel(channel_id)
+    if channel:
+        async for msg in channel.history(limit=message_count):
 
-        if channel:
-            async for msg in channel.history(limit=message_count):
+            if msg.author.bot:
+                continue
 
-                if msg.author.bot:
-                    continue
+            content = msg.content.strip()
 
-                content = msg.content.strip()
+            if not content.isdigit():
+                continue
 
-                if not content.isdigit():
-                    continue
+            try:
+                number = int(content)
 
-                try:
-                    number = int(content)
+                if number > count:
+                    await msg.delete()
+                    deleted += 1
 
-                    if number > count:
-                        await msg.delete()
-                        deleted += 1
-
-                except Exception as e:
-                    print(f"Delete failed: {e}")
+            except Exception as e:
+                print(f"Delete failed: {e}")
 
     await interaction.followup.send(
         f"✅ Count updated.\n"
@@ -592,18 +445,14 @@ async def delete_last_messages(
 
     await interaction.response.defer(ephemeral=True)
 
-    channel_id = config["counting_channel_id"]
+    channel = get_configured_channel()
 
-    if channel_id == 0:
+    if channel is None:
         await interaction.followup.send(
             "❌ Counting channel is not configured.",
             ephemeral=True
         )
         return
-
-    channel = client.get_channel(channel_id)
-
-    if channel is None:
         await interaction.followup.send(
             "❌ Could not find the counting channel.",
             ephemeral=True
@@ -648,44 +497,7 @@ async def user_stats(
 
     # save_stats()
 
-    embed = discord.Embed(
-        title="📊 Counting Statistics",
-        description=f"Statistics for **{user.display_name}**",
-        color=discord.Color.blue()
-    )
-
-    embed.set_thumbnail(url=user.display_avatar.url)
-
-    embed.add_field(
-        name="📈 Accepted Counts",
-        value=f"`{data['total_count']:,}`",
-        inline=True
-    )
-
-    embed.add_field(
-        name="🔥 Current Streak",
-        value=f"`{data['cur_streak']}` day(s)",
-        inline=True
-    )
-
-    embed.add_field(
-        name="🏆 Best Streak",
-        value=f"`{data['max_streak']}` day(s)",
-        inline=True
-    )
-
-    embed.add_field(
-        name="🕒 Last Active",
-        value=data["last_active_date"] or "Never",
-        inline=False
-    )
-
-    embed.set_footer(
-    text="Counting Bot • Keep the streak alive! :greed:"
-    )
-
-    embed.timestamp = datetime.now(ZoneInfo("Asia/Kolkata"))
-
+    embed = build_user_stats_embed(user, data)
     await interaction.response.send_message(embed=embed)
 
 # server-leaderboard
@@ -749,94 +561,15 @@ async def post_daily_report():
 
     print('--------------------------------------')
 
-    yesterday = (
-        datetime.now(ZoneInfo("Asia/Kolkata")).date()
-        - timedelta(days=1)
-    )
-
-    key = yesterday.strftime("%d%m%Y")
-
-    if key not in daily_stats:
-        return
-
-    day = daily_stats[key]
-
     channel = await client.fetch_channel(config["counting_channel_id"])
 
     if channel is None:
         return
 
-    top = sorted(
-        day["users"].values(),
-        key=lambda x: x["count"],
-        reverse=True
-    )[:3]
+    embed = build_daily_report_embed(channel.guild)
 
-    embed = discord.Embed(
-        title="📊 Daily Counting Report",
-        description=f"Statistics for **{yesterday.strftime('%d %b %Y')}**",
-        color=discord.Color.blurple()
-    )
-
-    embed.add_field(
-    name="📈 Total Accepted Counts",
-    value=f"**{day['total_accepted']:,}**",
-    inline=True
-    )
-
-    embed.add_field(
-        name="👥 Active Participants",
-        value=f"**{len(day['users'])}**",
-        inline=True
-    )
-
-    # Force a new row
-    embed.add_field(
-        name="\u200b",
-        value="\u200b",
-        inline=False
-    )
-
-    embed.add_field(
-        name="🌱 New Participants",
-        value=f"**{len(day['new_participants'])}**",
-        inline=True
-    )
-
-    embed.add_field(
-        name="🔄 Returning Counters",
-        value=f"**{len(day['returning_users'])}**",
-        inline=True
-    )
-
-    leaderboard = ""
-
-    medals = ["🥇", "🥈", "🥉"]
-
-    for i, user in enumerate(top):
-        leaderboard += (
-            f"{medals[i]} **{user['username']}** — "
-            f"`{user['count']}` counts\n"
-        )
-
-    if leaderboard == "":
-        leaderboard = "No counts yesterday."
-
-    embed.add_field(
-        name="🏆 Top Counters",
-        value=leaderboard,
-        inline=False
-    )
-
-    embed.set_footer(
-        text="See you tomorrow for another recap! 🚀"
-    )
-
-    embed.timestamp = datetime.now(ZoneInfo("Asia/Kolkata"))
-
-    print(channel.id)
-    print(channel.name)
-    print(config["counting_channel_id"])
+    if embed is None:
+        return
 
     perms = channel.permissions_for(channel.guild.me)
 
@@ -921,36 +654,24 @@ async def on_message(message):
     ):
         if is_allowed_role:
             return
-        try:
-            await message.delete()
-        except Exception as e:
-            print(f"Delete failed: {e}")
+        await delete_message_safely(message)
         return
 
     # Must be integer
     if not content.isdigit():
         if is_allowed_role:
             return
-        try:
-            await message.delete()
-        except Exception as e:
-            print(f"Delete failed: {e}")
+        await delete_message_safely(message)
         return
 
     # Same user twice
     if message.author.id == state["last_user_id"]:
-        try:
-            await message.delete()
-        except Exception as e:
-            print(f"Delete failed: {e}")
+        await delete_message_safely(message)
         return
 
     # Reject leading zeros
     if str(int(content)) != content:
-        try:
-            await message.delete()
-        except Exception as e:
-            print(f"Delete failed: {e}")
+        await delete_message_safely(message)
         return
 
     number = int(content)
@@ -958,29 +679,15 @@ async def on_message(message):
     # Must be next number according to saved state
     print(number, state["last_number"])
     if number != state["last_number"] + 1:
-        try:
-            await message.delete()
-        except Exception as e:
-            print(f"Delete failed: {e}")
+        await delete_message_safely(message)
         return
 
     # Valid count
-    state["last_number"] = number
-    state["last_user_id"] = message.author.id
-
-    save_state()
-
-    # ----------------------------
-    # Update User Stats
-    # ----------------------------
-
-    user_id = str(message.author.id)
-
-    is_new_user = user_id not in stats
-
-    user = ensure_user_stats(
-        user_id,
-        message.author.display_name
+    number = counting_helpers.update_count_state_and_stats(
+        message,
+        state,
+        stats,
+        daily_stats,
     )
 
     today_date = datetime.now(ZoneInfo("Asia/Kolkata")).date()
@@ -1079,22 +786,15 @@ async def on_message(message):
     # Milestone messages
     if number % 10000 == 0:
         await message.add_reaction("🏆")
-        await message.channel.send(
-            f"🏆 **MILESTONE ACHIEVED!** 🏆\n"
-            f"We've reached **{number:,}**! Incredible work everyone!"
-        )
+        await send_milestone(number, message.channel)
 
     elif number % 1000 == 0:
-        await message.add_reaction("💪🏻")
-        await message.channel.send(
-            f"**{number:,}** reached! Keep the count going! 💪🏻"
-        )
+        await message.add_reaction("🔥")
+        await send_milestone(number, message.channel)
 
     elif number % 100 == 0:
         await message.add_reaction("💯")
-        await message.channel.send(
-            f"Nice! **{number:,}** reached already! Keep it up! 💯"
-        )
+        await send_milestone(number, message.channel)
 
     print(
         f"Accepted count {number} "
@@ -1108,6 +808,9 @@ async def on_message(message):
 
 @client.event
 async def on_message_edit(before, after):
+
+    if after.author.bot:
+        return
 
     channel_id = config["counting_channel_id"]
 
