@@ -171,7 +171,7 @@ def build_user_stats_embed(user, data):
     embed.add_field(name="🔥 Current Streak", value=f"`{data['cur_streak']}` day(s)", inline=True)
     embed.add_field(name="🏆 Best Streak", value=f"`{data['max_streak']}` day(s)", inline=True)
     embed.add_field(name="🕒 Last Active", value=data["last_active_date"] or "Never", inline=False)
-    embed.set_footer(text="Counting Bot • Keep the streak alive! :greed:")
+    embed.set_footer(text="Counting Bot • Keep the streak alive!")
     embed.timestamp = datetime.now(ZoneInfo("Asia/Kolkata"))
     return embed
 
@@ -181,21 +181,43 @@ def check_permissions(roles):
 
 
 
-async def send_personal_milestone(message, user, streak):
+async def send_personal_milestone(message, user, previous_total_count, previous_streak, current_total_count, current_streak):
     milestones = []
+    announced_count_milestones = user.setdefault("announced_count_milestones", [])
+    announced_streak_milestones = user.setdefault("announced_streak_milestones", [])
 
-    if user["total_count"] in {500, 1000, 5000, 10000}:
-        milestones.append(
-            f"🎉 {user['username']} just reached {user['total_count']:,} accepted counts!"
-        )
+    count_thresholds = [500, 1000, 5000, 10000]
+    crossed_count_thresholds = [
+        threshold for threshold in count_thresholds
+        if previous_total_count < threshold <= current_total_count
+        and threshold not in announced_count_milestones
+    ]
 
-    if streak in {7, 14, 30, 60, 100}:
+    if crossed_count_thresholds:
+        threshold = max(crossed_count_thresholds)
         milestones.append(
-            f"🥳 {user['username']} reached a {streak}-day streak!"
+            f"🎉 <@{message.author.id}> just reached {threshold:,} accepted counts!"
         )
+        announced_count_milestones.append(threshold)
+
+    streak_thresholds = [1, 5, 7, 10, 14, 21, 30, 45, 60, 69, 90, 100]
+    crossed_streak_thresholds = [
+        threshold for threshold in streak_thresholds
+        if previous_streak < threshold <= current_streak
+        and threshold not in announced_streak_milestones
+    ]
+    # print(previous_streak,current_streak)
+
+    if crossed_streak_thresholds:
+        threshold = max(crossed_streak_thresholds)
+        milestones.append(
+            f"🥳 <@{message.author.id}> reached a {threshold}-day streak!"
+        )
+        announced_streak_milestones.append(threshold)
 
     if milestones:
         await message.channel.send("\n".join(milestones))
+        save_stats()
 
 def cleanup_daily_stats():
     return stats_helpers.cleanup_daily_stats(daily_stats)
@@ -615,7 +637,7 @@ async def daily_report_scheduler():
             if embed:await channel.send(embed=embed)
             embed = build_server_leaderboard(channel.guild,5)
             await channel.send(embed=embed)
-            await post_daily_report()
+            # await post_daily_report()
             print("Daily report posted.")
         except Exception:
             traceback.print_exc()
@@ -683,6 +705,11 @@ async def on_message(message):
         return
 
     # Valid count
+    user_id = str(message.author.id)
+    user = ensure_user_stats(user_id, message.author.display_name)
+    previous_total_count = user["total_count"]
+    previous_streak = user["cur_streak"]
+
     number = counting_helpers.update_count_state_and_stats(
         message,
         state,
@@ -690,98 +717,16 @@ async def on_message(message):
         daily_stats,
     )
 
-    today_date = datetime.now(ZoneInfo("Asia/Kolkata")).date()
-    today_str = today_date.isoformat()
-    today_key = today_date.strftime("%d%m%Y")
+    user = ensure_user_stats(user_id, message.author.display_name)
 
-    # ----------------------------
-    # Daily Stats
-    # ----------------------------
-
-    if today_key not in daily_stats:
-
-        daily_stats[today_key] = {
-            "total_accepted": 0,
-            "new_participants": [],
-            "returning_users": [],
-            "users": {}
-        }
-
-    today_stats = daily_stats[today_key]
-
-    today_stats["total_accepted"] += 1
-
-    if user_id not in today_stats["users"]:
-
-        today_stats["users"][user_id] = {
-            "username": message.author.display_name,
-            "count": 0
-        }
-
-    today_stats["users"][user_id]["username"] = message.author.display_name
-    today_stats["users"][user_id]["count"] += 1
-
-    if is_new_user and user_id not in today_stats["new_participants"]:
-        today_stats["new_participants"].append(user_id)
-
-    # ----------------------------
-    # Lifetime Stats
-    # ----------------------------
-
-    user["total_count"] += 1
-
-    last_day = user["last_active_day"]
-
-    if last_day:
-
-        last_day = datetime.strptime(
-            last_day,
-            "%Y-%m-%d"
-        ).date()
-
-        if today_date == last_day:
-            # Already counted today
-            pass
-
-        elif today_date == last_day + timedelta(days=1):
-            # Consecutive day
-            user["cur_streak"] += 1
-
-        else:
-            # Returned after missing one or more days
-            if user_id not in today_stats["returning_users"]:
-                today_stats["returning_users"].append(user_id)
-
-            user["max_streak"] = max(
-                user["max_streak"],
-                user["cur_streak"]
-            )
-
-            user["cur_streak"] = 0
-
-    else:
-        # First ever accepted count
-        user["cur_streak"] = 1
-
-    if user["cur_streak"] == 0:
-        user["cur_streak"] = 1
-
-    user["max_streak"] = max(
-        user["max_streak"],
-        user["cur_streak"]
+    await send_personal_milestone(
+        message,
+        user,
+        previous_total_count,
+        previous_streak,
+        user["total_count"],
+        user["cur_streak"],
     )
-
-    user["last_active_day"] = today_str
-
-    user["last_active_date"] = (
-        datetime.now(ZoneInfo("Asia/Kolkata"))
-        .strftime("%d %b %Y %I:%M %p")
-    )
-
-    save_stats()
-    save_daily_stats()
-
-    await send_personal_milestone(message, user, user["cur_streak"])
 
     # Milestone messages
     if number % 10000 == 0:

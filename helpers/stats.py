@@ -18,6 +18,8 @@ def ensure_user_stats(stats: dict[str, Any], user_id: str, username: str):
     user.setdefault("last_active_day", "")
     user.setdefault("cur_streak", 0)
     user.setdefault("max_streak", 0)
+    user.setdefault("announced_count_milestones", [])
+    user.setdefault("announced_streak_milestones", [])
 
     user["username"] = username
     return user
