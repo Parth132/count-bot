@@ -1,682 +1,4 @@
 {
-    "10072026": {
-        "total_accepted": 12,
-        "new_participants": [
-            "917841491223805983"
-        ],
-        "returning_users": [
-            "1197230845874933782"
-        ],
-        "users": {
-            "917841491223805983": {
-                "username": "Oblivioninferno3",
-                "count": 1
-            },
-            "1039518597757800448": {
-                "username": "Slide Master",
-                "count": 2
-            },
-            "444749508941709332": {
-                "username": "TheMob",
-                "count": 2
-            },
-            "662281544001388556": {
-                "username": "NeverMind(\u25c9_\u25c9)",
-                "count": 1
-            },
-            "1197230845874933782": {
-                "username": "Dynamic v27.0 (Dev Beta 1)",
-                "count": 1
-            }
-        }
-    },
-    "11072026": {
-        "total_accepted": 41,
-        "new_participants": [],
-        "returning_users": [],
-        "users": {
-            "662281544001388556": {
-                "username": "NeverMind(\u25c9_\u25c9)",
-                "count": 5
-            },
-            "1330755629794459713": {
-                "username": "The Elder Troll",
-                "count": 3
-            },
-            "931403631062810644": {
-                "username": "DBZ",
-                "count": 2
-            },
-            "1197230845874933782": {
-                "username": "Dynamic v27.0 (Dev Beta 1)",
-                "count": 13
-            },
-            "989030943245336636": {
-                "username": "Bratman",
-                "count": 4
-            },
-            "727879265764507719": {
-                "username": "Farzi",
-                "count": 1
-            },
-            "631429894680870922": {
-                "username": "LJ28",
-                "count": 4
-            },
-            "1473544166335189133": {
-                "username": "Saikrishna",
-                "count": 2
-            },
-            "1488255848496234587": {
-                "username": "Theweaklight",
-                "count": 4
-            },
-            "1286606698240409631": {
-                "username": "Riyaz",
-                "count": 2
-            },
-            "1185933859515273217": {
-                "username": "Esoteric",
-                "count": 1
-            }
-        }
-    },
-    "12072026": {
-        "total_accepted": 42,
-        "new_participants": [
-            "1432400199103287306"
-        ],
-        "returning_users": [
-            "879416656525414451"
-        ],
-        "users": {
-            "1185933859515273217": {
-                "username": "Esoteric",
-                "count": 4
-            },
-            "1197230845874933782": {
-                "username": "Dynamic v27.0 (Dev Beta 1)",
-                "count": 12
-            },
-            "631429894680870922": {
-                "username": "LJ28",
-                "count": 5
-            },
-            "1286606698240409631": {
-                "username": "Riyaz",
-                "count": 6
-            },
-            "879416656525414451": {
-                "username": "Billu da",
-                "count": 2
-            },
-            "1432400199103287306": {
-                "username": "Paramesh",
-                "count": 4
-            },
-            "931403631062810644": {
-                "username": "DBZ",
-                "count": 4
-            },
-            "662281544001388556": {
-                "username": "NeverMind(\u25c9_\u25c9)",
-                "count": 3
-            },
-            "989030943245336636": {
-                "username": "Bratman",
-                "count": 2
-            }
-        }
-    },
-    "13072026": {
-        "total_accepted": 195,
-        "new_participants": [
-            "1086992487727509624",
-            "577000471508680747"
-        ],
-        "returning_users": [
-            "1473544166335189133",
-            "1330755629794459713",
-            "666239306414817292"
-        ],
-        "users": {
-            "931403631062810644": {
-                "username": "DBZ",
-                "count": 37
-            },
-            "1197230845874933782": {
-                "username": "Dynamic v27.0 (Dev Beta 1)",
-                "count": 68
-            },
-            "631429894680870922": {
-                "username": "LJ28",
-                "count": 8
-            },
-            "989030943245336636": {
-                "username": "Bratman",
-                "count": 25
-            },
-            "1286606698240409631": {
-                "username": "Riyaz",
-                "count": 30
-            },
-            "879416656525414451": {
-                "username": "Billu da",
-                "count": 1
-            },
-            "1185933859515273217": {
-                "username": "Esoteric",
-                "count": 5
-            },
-            "1473544166335189133": {
-                "username": "Saikrishna",
-                "count": 2
-            },
-            "1330755629794459713": {
-                "username": "The Elder Troll",
-                "count": 3
-            },
-            "662281544001388556": {
-                "username": "NeverMind(\u25c9_\u25c9)",
-                "count": 7
-            },
-            "666239306414817292": {
-                "username": "Marcoooo !!!",
-                "count": 6
-            },
-            "1086992487727509624": {
-                "username": "Raddish",
-                "count": 2
-            },
-            "577000471508680747": {
-                "username": "KSHITIJ",
-                "count": 1
-            }
-        }
-    },
-    "14072026": {
-        "total_accepted": 71,
-        "new_participants": [
-            "270037017360859138"
-        ],
-        "returning_users": [
-            "205956709917655041"
-        ],
-        "users": {
-            "931403631062810644": {
-                "username": "DBZ",
-                "count": 4
-            },
-            "631429894680870922": {
-                "username": "LJ28",
-                "count": 11
-            },
-            "1086992487727509624": {
-                "username": "Raddish",
-                "count": 1
-            },
-            "1473544166335189133": {
-                "username": "Saikrishna",
-                "count": 3
-            },
-            "1197230845874933782": {
-                "username": "Dynamic v27.0 (Dev Beta 1)",
-                "count": 16
-            },
-            "989030943245336636": {
-                "username": "Bratman",
-                "count": 1
-            },
-            "662281544001388556": {
-                "username": "NeverMind(\u25c9_\u25c9)",
-                "count": 4
-            },
-            "205956709917655041": {
-                "username": "Saint",
-                "count": 2
-            },
-            "1330755629794459713": {
-                "username": "The Elder Troll",
-                "count": 16
-            },
-            "1286606698240409631": {
-                "username": "Riyaz",
-                "count": 8
-            },
-            "1185933859515273217": {
-                "username": "Esoteric",
-                "count": 3
-            },
-            "666239306414817292": {
-                "username": "Marcoooo !!!",
-                "count": 1
-            },
-            "270037017360859138": {
-                "username": "yadu23",
-                "count": 1
-            }
-        }
-    },
-    "15072026": {
-        "total_accepted": 147,
-        "new_participants": [
-            "461493254391857163",
-            "905361407757942804"
-        ],
-        "returning_users": [
-            "1401795774077210735"
-        ],
-        "users": {
-            "1286606698240409631": {
-                "username": "Riyaz",
-                "count": 56
-            },
-            "1197230845874933782": {
-                "username": "Dynamic v27.0 (Dev Beta 1)",
-                "count": 27
-            },
-            "461493254391857163": {
-                "username": "anand",
-                "count": 1
-            },
-            "1046664783946059808": {
-                "username": "Gane_sh",
-                "count": 2
-            },
-            "905361407757942804": {
-                "username": "Viz TF",
-                "count": 1
-            },
-            "1330755629794459713": {
-                "username": "The Elder Troll",
-                "count": 4
-            },
-            "1473544166335189133": {
-                "username": "Saikrishna",
-                "count": 3
-            },
-            "931403631062810644": {
-                "username": "DBZ",
-                "count": 16
-            },
-            "631429894680870922": {
-                "username": "LJ28",
-                "count": 3
-            },
-            "1086992487727509624": {
-                "username": "Raddish",
-                "count": 1
-            },
-            "662281544001388556": {
-                "username": "NeverMind(\u25c9_\u25c9)",
-                "count": 1
-            },
-            "1401795774077210735": {
-                "username": "khooni_darinda",
-                "count": 32
-            }
-        }
-    },
-    "16072026": {
-        "total_accepted": 30,
-        "new_participants": [],
-        "returning_users": [
-            "336528534136946688",
-            "1185933859515273217",
-            "989030943245336636",
-            "727879265764507719"
-        ],
-        "users": {
-            "1286606698240409631": {
-                "username": "Riyaz",
-                "count": 3
-            },
-            "631429894680870922": {
-                "username": "LJ28",
-                "count": 5
-            },
-            "1330755629794459713": {
-                "username": "The Elder Troll",
-                "count": 2
-            },
-            "931403631062810644": {
-                "username": "DBZ",
-                "count": 3
-            },
-            "662281544001388556": {
-                "username": "NeverMind(\u25c9_\u25c9)",
-                "count": 1
-            },
-            "336528534136946688": {
-                "username": "k3v1nm0j0",
-                "count": 1
-            },
-            "1197230845874933782": {
-                "username": "Dynamic v27.0 (Dev Beta 1)",
-                "count": 7
-            },
-            "1185933859515273217": {
-                "username": "Esoteric",
-                "count": 4
-            },
-            "1473544166335189133": {
-                "username": "Saikrishna",
-                "count": 1
-            },
-            "989030943245336636": {
-                "username": "Bratman",
-                "count": 1
-            },
-            "727879265764507719": {
-                "username": "Farzi",
-                "count": 1
-            },
-            "1086992487727509624": {
-                "username": "Raddish",
-                "count": 1
-            }
-        }
-    },
-    "17072026": {
-        "total_accepted": 45,
-        "new_participants": [
-            "424205459252051979",
-            "780336732738551879",
-            "1379063866977161286"
-        ],
-        "returning_users": [],
-        "users": {
-            "1197230845874933782": {
-                "username": "Dynamic v27.0 (Dev Beta 1)",
-                "count": 12
-            },
-            "631429894680870922": {
-                "username": "LJ28",
-                "count": 3
-            },
-            "424205459252051979": {
-                "username": "SNRahulYT",
-                "count": 1
-            },
-            "1286606698240409631": {
-                "username": "Riyaz",
-                "count": 2
-            },
-            "931403631062810644": {
-                "username": "DBZ",
-                "count": 4
-            },
-            "1330755629794459713": {
-                "username": "The Elder Troll",
-                "count": 7
-            },
-            "1473544166335189133": {
-                "username": "Saikrishna",
-                "count": 4
-            },
-            "780336732738551879": {
-                "username": "hi_pizza",
-                "count": 1
-            },
-            "1379063866977161286": {
-                "username": "G.B road seth",
-                "count": 1
-            },
-            "662281544001388556": {
-                "username": "NeverMind(\u25c9_\u25c9)",
-                "count": 3
-            },
-            "1185933859515273217": {
-                "username": "Esoteric",
-                "count": 6
-            },
-            "1086992487727509624": {
-                "username": "Raddish",
-                "count": 1
-            }
-        }
-    },
-    "18072026": {
-        "total_accepted": 41,
-        "new_participants": [
-            "499969322777837590",
-            "1298155095233662982"
-        ],
-        "returning_users": [
-            "336528534136946688",
-            "205956709917655041",
-            "1401795774077210735"
-        ],
-        "users": {
-            "1086992487727509624": {
-                "username": "Raddish",
-                "count": 2
-            },
-            "631429894680870922": {
-                "username": "LJ28",
-                "count": 5
-            },
-            "1185933859515273217": {
-                "username": "Esoteric",
-                "count": 2
-            },
-            "662281544001388556": {
-                "username": "NeverMind(\u25c9_\u25c9)",
-                "count": 5
-            },
-            "336528534136946688": {
-                "username": "k3v1nm0j0",
-                "count": 1
-            },
-            "1286606698240409631": {
-                "username": "Riyaz",
-                "count": 5
-            },
-            "1330755629794459713": {
-                "username": "The Elder Troll",
-                "count": 1
-            },
-            "1197230845874933782": {
-                "username": "Dynamic v27.0 (Dev Beta 1)",
-                "count": 12
-            },
-            "780336732738551879": {
-                "username": "hi_pizza",
-                "count": 1
-            },
-            "499969322777837590": {
-                "username": "shield of Achielles",
-                "count": 1
-            },
-            "931403631062810644": {
-                "username": "DBZ",
-                "count": 2
-            },
-            "1473544166335189133": {
-                "username": "Saikrishna",
-                "count": 1
-            },
-            "1298155095233662982": {
-                "username": "deep",
-                "count": 1
-            },
-            "205956709917655041": {
-                "username": "Saint",
-                "count": 1
-            },
-            "1401795774077210735": {
-                "username": "khooni_darinda",
-                "count": 1
-            }
-        }
-    },
-    "19072026": {
-        "total_accepted": 37,
-        "new_participants": [
-            "474982758213615617"
-        ],
-        "returning_users": [
-            "989030943245336636",
-            "727879265764507719"
-        ],
-        "users": {
-            "1330755629794459713": {
-                "username": "The Elder Troll",
-                "count": 1
-            },
-            "1185933859515273217": {
-                "username": "Esoteric",
-                "count": 2
-            },
-            "931403631062810644": {
-                "username": "DBZ",
-                "count": 2
-            },
-            "336528534136946688": {
-                "username": "k3v1nm0j0",
-                "count": 1
-            },
-            "662281544001388556": {
-                "username": "NeverMind(\u25c9_\u25c9)",
-                "count": 6
-            },
-            "1286606698240409631": {
-                "username": "Riyaz",
-                "count": 7
-            },
-            "1197230845874933782": {
-                "username": "Dynamic v27.0 (Dev Beta 1)",
-                "count": 12
-            },
-            "631429894680870922": {
-                "username": "LJ28",
-                "count": 2
-            },
-            "474982758213615617": {
-                "username": "Not_CELL",
-                "count": 1
-            },
-            "989030943245336636": {
-                "username": "Bratman",
-                "count": 2
-            },
-            "727879265764507719": {
-                "username": "Farzi",
-                "count": 1
-            }
-        }
-    },
-    "20072026": {
-        "total_accepted": 45,
-        "new_participants": [
-            "584602238308188201"
-        ],
-        "returning_users": [
-            "1086992487727509624",
-            "666239306414817292"
-        ],
-        "users": {
-            "631429894680870922": {
-                "username": "LJ28",
-                "count": 4
-            },
-            "1197230845874933782": {
-                "username": "Dynamic v27.0 (Dev Beta 1)",
-                "count": 16
-            },
-            "336528534136946688": {
-                "username": "k3v1nm0j0",
-                "count": 1
-            },
-            "1330755629794459713": {
-                "username": "The Elder Troll",
-                "count": 7
-            },
-            "662281544001388556": {
-                "username": "NeverMind(\u25c9_\u25c9)",
-                "count": 4
-            },
-            "1086992487727509624": {
-                "username": "Raddish",
-                "count": 1
-            },
-            "666239306414817292": {
-                "username": "Marcoooo !!!",
-                "count": 1
-            },
-            "727879265764507719": {
-                "username": "Farzi",
-                "count": 1
-            },
-            "584602238308188201": {
-                "username": "Craniax",
-                "count": 1
-            },
-            "1185933859515273217": {
-                "username": "Esoteric",
-                "count": 2
-            },
-            "1286606698240409631": {
-                "username": "Riyas",
-                "count": 6
-            },
-            "931403631062810644": {
-                "username": "DBZ",
-                "count": 1
-            }
-        }
-    },
-    "21072026": {
-        "total_accepted": 24,
-        "new_participants": [],
-        "returning_users": [
-            "1473544166335189133",
-            "1039518597757800448",
-            "474982758213615617"
-        ],
-        "users": {
-            "631429894680870922": {
-                "username": "LJ28",
-                "count": 5
-            },
-            "1473544166335189133": {
-                "username": "Saikrishna",
-                "count": 1
-            },
-            "336528534136946688": {
-                "username": "k3v1nm0j0",
-                "count": 1
-            },
-            "1185933859515273217": {
-                "username": "Esoteric",
-                "count": 1
-            },
-            "1197230845874933782": {
-                "username": "Dynamic v27.0 (Dev Beta 1)",
-                "count": 7
-            },
-            "931403631062810644": {
-                "username": "DBZ",
-                "count": 3
-            },
-            "1286606698240409631": {
-                "username": "Riyas",
-                "count": 2
-            },
-            "1039518597757800448": {
-                "username": "Slide Master",
-                "count": 1
-            },
-            "662281544001388556": {
-                "username": "NeverMind(\u25c9_\u25c9)",
-                "count": 2
-            },
-            "474982758213615617": {
-                "username": "Not_CELL",
-                "count": 1
-            }
-        }
-    },
     "22072026": {
         "total_accepted": 53,
         "new_participants": [
@@ -1267,17 +589,22 @@
         }
     },
     "01082026": {
-        "total_accepted": 15,
+        "total_accepted": 144,
         "new_participants": [],
         "returning_users": [
             "1503010573401591880",
             "747088426469294100",
-            "701142888796520579"
+            "701142888796520579",
+            "1039518597757800448",
+            "1405950424514564127",
+            "666239306414817292",
+            "879416656525414451",
+            "874989190067146772"
         ],
         "users": {
             "1286606698240409631": {
                 "username": "Riyas",
-                "count": 2
+                "count": 4
             },
             "1503010573401591880": {
                 "username": "Peasant of Vice City",
@@ -1285,14 +612,735 @@
             },
             "1275716495078330409": {
                 "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
-                "count": 2
+                "count": 38
             },
             "1197230845874933782": {
                 "username": "Dynamic v27.0 (Dev Beta 1)",
-                "count": 3
+                "count": 29
             },
             "780336732738551879": {
                 "username": "hi_pizza",
+                "count": 1
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 6
+            },
+            "713227266871656478": {
+                "username": "rishavmaiti",
+                "count": 1
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 2
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 9
+            },
+            "747088426469294100": {
+                "username": "Insane_Dwane",
+                "count": 1
+            },
+            "701142888796520579": {
+                "username": "curious_coder",
+                "count": 1
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 29
+            },
+            "1039518597757800448": {
+                "username": "Slide Master",
+                "count": 1
+            },
+            "666239306414817292": {
+                "username": "Marcoooo !!!",
+                "count": 6
+            },
+            "631429894680870922": {
+                "username": "LJ28",
+                "count": 1
+            },
+            "879416656525414451": {
+                "username": "BILLU DA\u2122",
+                "count": 5
+            },
+            "441627155663814656": {
+                "username": "J",
+                "count": 1
+            },
+            "970602309849583707": {
+                "username": "Raymond Smith",
+                "count": 1
+            },
+            "205956709917655041": {
+                "username": "Saint",
+                "count": 1
+            },
+            "874989190067146772": {
+                "username": "shinchan2405",
+                "count": 2
+            }
+        }
+    },
+    "02082026": {
+        "total_accepted": 89,
+        "new_participants": [],
+        "returning_users": [
+            "1086992487727509624",
+            "1473544166335189133",
+            "1298155095233662982"
+        ],
+        "users": {
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 28
+            },
+            "1086992487727509624": {
+                "username": "Raddish",
+                "count": 2
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 14
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 10
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 14
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 2
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 3
+            },
+            "1298155095233662982": {
+                "username": "deep",
+                "count": 1
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 3
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 4
+            },
+            "879416656525414451": {
+                "username": "BILLU DA\u2122",
+                "count": 1
+            },
+            "701142888796520579": {
+                "username": "curious_coder",
+                "count": 1
+            },
+            "543835275848318996": {
+                "username": "maviss4u",
+                "count": 3
+            },
+            "631429894680870922": {
+                "username": "LJ28",
+                "count": 1
+            },
+            "1109462670802952192": {
+                "username": ".syed",
+                "count": 1
+            },
+            "707102016744456224": {
+                "username": "ashdaawin",
+                "count": 1
+            }
+        }
+    },
+    "03082026": {
+        "total_accepted": 75,
+        "new_participants": [],
+        "returning_users": [
+            "713227266871656478",
+            "864499016888614972",
+            "205956709917655041",
+            "727879265764507719",
+            "874989190067146772"
+        ],
+        "users": {
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 18
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 6
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 15
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 17
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 1
+            },
+            "713227266871656478": {
+                "username": "rishavmaiti",
+                "count": 2
+            },
+            "864499016888614972": {
+                "username": "\u00c8l Profesor\u2122",
+                "count": 1
+            },
+            "205956709917655041": {
+                "username": "Saint",
+                "count": 1
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 3
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 3
+            },
+            "727879265764507719": {
+                "username": "Farzi",
+                "count": 1
+            },
+            "874989190067146772": {
+                "username": "shinchan2405",
+                "count": 2
+            },
+            "1086992487727509624": {
+                "username": "Raddish",
+                "count": 1
+            },
+            "858349381496471552": {
+                "username": "ArthurMorganZzzZ",
+                "count": 1
+            },
+            "879416656525414451": {
+                "username": "BILLU DA\u2122",
+                "count": 2
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 1
+            }
+        }
+    },
+    "04082026": {
+        "total_accepted": 56,
+        "new_participants": [],
+        "returning_users": [],
+        "users": {
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 21
+            },
+            "713227266871656478": {
+                "username": "rishavmaiti",
+                "count": 1
+            },
+            "874989190067146772": {
+                "username": "shinchan2405",
+                "count": 1
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 7
+            },
+            "727879265764507719": {
+                "username": "Farzi",
+                "count": 1
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 9
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 1
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 6
+            },
+            "1086992487727509624": {
+                "username": "Raddish",
+                "count": 1
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 2
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 2
+            },
+            "879416656525414451": {
+                "username": "BILLU DA\u2122",
+                "count": 3
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 1
+            }
+        }
+    },
+    "05082026": {
+        "total_accepted": 64,
+        "new_participants": [],
+        "returning_users": [
+            "631429894680870922"
+        ],
+        "users": {
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 4
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 16
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 7
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 22
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 3
+            },
+            "631429894680870922": {
+                "username": "LJ28",
+                "count": 4
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 2
+            },
+            "713227266871656478": {
+                "username": "rishavmaiti",
+                "count": 1
+            },
+            "879416656525414451": {
+                "username": "BILLU DA\u2122",
+                "count": 3
+            },
+            "1086992487727509624": {
+                "username": "Raddish",
+                "count": 1
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 1
+            }
+        }
+    },
+    "06082026": {
+        "total_accepted": 144,
+        "new_participants": [],
+        "returning_users": [
+            "1473544166335189133",
+            "874989190067146772"
+        ],
+        "users": {
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 7
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 21
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 17
+            },
+            "790793129158115350": {
+                "username": "Saffo",
+                "count": 1
+            },
+            "879416656525414451": {
+                "username": "BILLU DA\u2122",
+                "count": 3
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 5
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 3
+            },
+            "713227266871656478": {
+                "username": "rishavmaiti",
+                "count": 2
+            },
+            "1086992487727509624": {
+                "username": "Raddish",
+                "count": 38
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 3
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 1
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 2
+            },
+            "874989190067146772": {
+                "username": "shinchan2405",
+                "count": 40
+            },
+            "631429894680870922": {
+                "username": "LJ28",
+                "count": 1
+            }
+        }
+    },
+    "07082026": {
+        "total_accepted": 60,
+        "new_participants": [],
+        "returning_users": [],
+        "users": {
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 7
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 9
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 15
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 1
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 2
+            },
+            "874989190067146772": {
+                "username": "shinchan2405",
+                "count": 5
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 14
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 2
+            },
+            "631429894680870922": {
+                "username": "LJ28",
+                "count": 2
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 2
+            },
+            "713227266871656478": {
+                "username": "rishavmaiti",
+                "count": 1
+            }
+        }
+    },
+    "08082026": {
+        "total_accepted": 360,
+        "new_participants": [],
+        "returning_users": [
+            "205956709917655041",
+            "1039518597757800448"
+        ],
+        "users": {
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 20
+            },
+            "874989190067146772": {
+                "username": "shinchan2405",
+                "count": 136
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 141
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 28
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 17
+            },
+            "205956709917655041": {
+                "username": "Saint",
+                "count": 1
+            },
+            "1039518597757800448": {
+                "username": "Slide Master",
+                "count": 1
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 3
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 3
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 3
+            },
+            "631429894680870922": {
+                "username": "LJ28",
+                "count": 1
+            },
+            "713227266871656478": {
+                "username": "rishavmaiti",
+                "count": 1
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 1
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 4
+            }
+        }
+    },
+    "09082026": {
+        "total_accepted": 58,
+        "new_participants": [],
+        "returning_users": [
+            "1503010573401591880",
+            "336528534136946688",
+            "879416656525414451"
+        ],
+        "users": {
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 20
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 11
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 8
+            },
+            "1503010573401591880": {
+                "username": "Peasant of Vice City",
+                "count": 2
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 2
+            },
+            "336528534136946688": {
+                "username": "k3v1nm0j0",
+                "count": 1
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 4
+            },
+            "879416656525414451": {
+                "username": "BILLU DA\u2122",
+                "count": 1
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 6
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 1
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 1
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 1
+            }
+        }
+    },
+    "10082026": {
+        "total_accepted": 71,
+        "new_participants": [],
+        "returning_users": [
+            "713227266871656478",
+            "631429894680870922"
+        ],
+        "users": {
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 6
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 23
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 8
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 23
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 2
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 2
+            },
+            "713227266871656478": {
+                "username": "rishavmaiti",
+                "count": 1
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 2
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 1
+            },
+            "631429894680870922": {
+                "username": "LJ28",
+                "count": 3
+            }
+        }
+    },
+    "11082026": {
+        "total_accepted": 65,
+        "new_participants": [],
+        "returning_users": [],
+        "users": {
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 5
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 20
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 2
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 1
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 2
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 16
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 11
+            },
+            "631429894680870922": {
+                "username": "LJ28",
+                "count": 5
+            },
+            "974219852933898281": {
+                "username": "turmeric",
+                "count": 1
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 1
+            },
+            "1522521666633072761": {
+                "username": "hallelujah",
+                "count": 1
+            }
+        }
+    },
+    "12082026": {
+        "total_accepted": 181,
+        "new_participants": [],
+        "returning_users": [
+            "879416656525414451",
+            "692730575735357440",
+            "1086992487727509624",
+            "1039518597757800448",
+            "713227266871656478",
+            "205956709917655041"
+        ],
+        "users": {
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 60
+            },
+            "879416656525414451": {
+                "username": "BILLU DA\u2122",
+                "count": 2
+            },
+            "631429894680870922": {
+                "username": "LJ28",
+                "count": 8
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 24
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 21
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 3
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 14
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 43
+            },
+            "1086992487727509624": {
+                "username": "Raddish",
+                "count": 1
+            },
+            "1039518597757800448": {
+                "username": "Slide Master",
                 "count": 1
             },
             "931403631062810644": {
@@ -1303,6 +1351,210 @@
                 "username": "rishavmaiti",
                 "count": 1
             },
+            "205956709917655041": {
+                "username": "Saint",
+                "count": 1
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 1
+            }
+        }
+    },
+    "13082026": {
+        "total_accepted": 79,
+        "new_participants": [],
+        "returning_users": [
+            "1185933859515273217",
+            "336528534136946688"
+        ],
+        "users": {
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 12
+            },
+            "879416656525414451": {
+                "username": "BILLU DA\u2122",
+                "count": 5
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 12
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 22
+            },
+            "631429894680870922": {
+                "username": "LJ28",
+                "count": 3
+            },
+            "1291413910380871681": {
+                "username": "Dr4cula1",
+                "count": 1
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 2
+            },
+            "336528534136946688": {
+                "username": "k3v1nm0j0",
+                "count": 1
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 2
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 9
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 6
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 3
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 1
+            }
+        }
+    },
+    "14082026": {
+        "total_accepted": 49,
+        "new_participants": [],
+        "returning_users": [
+            "713227266871656478"
+        ],
+        "users": {
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 20
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 2
+            },
+            "631429894680870922": {
+                "username": "LJ28",
+                "count": 1
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 8
+            },
+            "713227266871656478": {
+                "username": "rishavmaiti",
+                "count": 1
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 3
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 10
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 4
+            }
+        }
+    },
+    "15082026": {
+        "total_accepted": 320,
+        "new_participants": [],
+        "returning_users": [
+            "336528534136946688",
+            "662281544001388556",
+            "441627155663814656"
+        ],
+        "users": {
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 151
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 11
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 4
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 143
+            },
+            "336528534136946688": {
+                "username": "k3v1nm0j0",
+                "count": 1
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 1
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 5
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 1
+            },
+            "713227266871656478": {
+                "username": "rishavmaiti",
+                "count": 1
+            },
+            "441627155663814656": {
+                "username": "J",
+                "count": 1
+            },
+            "631429894680870922": {
+                "username": "LJ28",
+                "count": 1
+            }
+        }
+    },
+    "16082026": {
+        "total_accepted": 43,
+        "new_participants": [],
+        "returning_users": [
+            "931403631062810644",
+            "879416656525414451"
+        ],
+        "users": {
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 5
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 14
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 7
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 8
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 4
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 2
+            },
+            "879416656525414451": {
+                "username": "BILLU DA\u2122",
+                "count": 1
+            },
             "1185933859515273217": {
                 "username": "Esoteric",
                 "count": 1
@@ -1310,13 +1562,707 @@
             "662281544001388556": {
                 "username": "NeverMind(\u25c9_\u25c9)",
                 "count": 1
+            }
+        }
+    },
+    "17082026": {
+        "total_accepted": 45,
+        "new_participants": [],
+        "returning_users": [],
+        "users": {
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 14
             },
-            "747088426469294100": {
-                "username": "Insane_Dwane",
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 11
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 5
+            },
+            "931403631062810644": {
+                "username": "DBZ",
                 "count": 1
             },
-            "701142888796520579": {
-                "username": "curious_coder",
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 3
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 4
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 5
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 1
+            },
+            "879416656525414451": {
+                "username": "BILLU DA\u2122",
+                "count": 1
+            }
+        }
+    },
+    "18082026": {
+        "total_accepted": 82,
+        "new_participants": [],
+        "returning_users": [
+            "1473544166335189133",
+            "713227266871656478"
+        ],
+        "users": {
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 1
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 29
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 13
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 2
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 15
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 10
+            },
+            "839865506549858334": {
+                "username": "TRNR",
+                "count": 3
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 7
+            },
+            "713227266871656478": {
+                "username": "rishavmaiti",
+                "count": 1
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 1
+            }
+        }
+    },
+    "19082026": {
+        "total_accepted": 43,
+        "new_participants": [],
+        "returning_users": [
+            "1185933859515273217",
+            "1039518597757800448"
+        ],
+        "users": {
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 13
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 4
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 12
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 1
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 3
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 2
+            },
+            "1039518597757800448": {
+                "username": "Slide Master",
+                "count": 1
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 2
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 1
+            },
+            "839865506549858334": {
+                "username": "TRNR",
+                "count": 1
+            },
+            "1463268059950354712": {
+                "username": "Pawan",
+                "count": 1
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 1
+            },
+            "1149791101776056391": {
+                "username": "\u2018Az\u012bm-ush-Sh\u0101n Shahansh\u0101hi s\u0331\u0101n\u012b",
+                "count": 1
+            }
+        }
+    },
+    "20082026": {
+        "total_accepted": 70,
+        "new_participants": [],
+        "returning_users": [
+            "336528534136946688",
+            "631429894680870922"
+        ],
+        "users": {
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 10
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 26
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 1
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 2
+            },
+            "426538261717057566": {
+                "username": "Dosaman",
+                "count": 1
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 12
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 12
+            },
+            "336528534136946688": {
+                "username": "k3v1nm0j0",
+                "count": 1
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 1
+            },
+            "1214160484220014682": {
+                "username": "professor1806",
+                "count": 1
+            },
+            "166128840719073281": {
+                "username": "Liquid_Daze",
+                "count": 1
+            },
+            "631429894680870922": {
+                "username": "LJ28",
+                "count": 1
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 1
+            }
+        }
+    },
+    "21082026": {
+        "total_accepted": 35,
+        "new_participants": [],
+        "returning_users": [
+            "879416656525414451",
+            "727879265764507719",
+            "205956709917655041"
+        ],
+        "users": {
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 5
+            },
+            "879416656525414451": {
+                "username": "BILLU DA\u2122",
+                "count": 1
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 15
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 1
+            },
+            "727879265764507719": {
+                "username": "Farzi",
+                "count": 1
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 7
+            },
+            "205956709917655041": {
+                "username": "Saint",
+                "count": 1
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 1
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 3
+            }
+        }
+    },
+    "22082026": {
+        "total_accepted": 54,
+        "new_participants": [],
+        "returning_users": [
+            "839865506549858334",
+            "662281544001388556"
+        ],
+        "users": {
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 17
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 12
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 9
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 4
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 4
+            },
+            "434851601208049665": {
+                "username": "swashhbucklerr",
+                "count": 4
+            },
+            "839865506549858334": {
+                "username": "TRNR",
+                "count": 1
+            },
+            "407919990973399061": {
+                "username": "Max",
+                "count": 1
+            },
+            "662281544001388556": {
+                "username": "NeverMind(\u25c9_\u25c9)",
+                "count": 1
+            },
+            "727879265764507719": {
+                "username": "Farzi",
+                "count": 1
+            }
+        }
+    },
+    "23082026": {
+        "total_accepted": 40,
+        "new_participants": [],
+        "returning_users": [
+            "1473544166335189133",
+            "780336732738551879",
+            "879416656525414451"
+        ],
+        "users": {
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 8
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 15
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 9
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 1
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 4
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 1
+            },
+            "780336732738551879": {
+                "username": "hi_pizza",
+                "count": 1
+            },
+            "879416656525414451": {
+                "username": "BILLU DA\u2122",
+                "count": 1
+            }
+        }
+    },
+    "24082026": {
+        "total_accepted": 55,
+        "new_participants": [],
+        "returning_users": [
+            "692730575735357440"
+        ],
+        "users": {
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 19
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 13
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 2
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 11
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 1
+            },
+            "434026833420353538": {
+                "username": "Punisher",
+                "count": 1
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 4
+            },
+            "645974717995679754": {
+                "username": "PAR7H",
+                "count": 1
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 3
+            }
+        }
+    },
+    "25082026": {
+        "total_accepted": 48,
+        "new_participants": [],
+        "returning_users": [
+            "839865506549858334",
+            "727879265764507719",
+            "1185933859515273217"
+        ],
+        "users": {
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 14
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 5
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 8
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 15
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 1
+            },
+            "839865506549858334": {
+                "username": "TRNR",
+                "count": 1
+            },
+            "727879265764507719": {
+                "username": "Farzi",
+                "count": 1
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 1
+            },
+            "1526640820986319010": {
+                "username": "visshkay",
+                "count": 1
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 1
+            }
+        }
+    },
+    "26082026": {
+        "total_accepted": 47,
+        "new_participants": [],
+        "returning_users": [
+            "780336732738551879",
+            "1473544166335189133",
+            "850715471371304960",
+            "974219852933898281"
+        ],
+        "users": {
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 4
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 9
+            },
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 9
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 15
+            },
+            "780336732738551879": {
+                "username": "hi_pizza",
+                "count": 2
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 2
+            },
+            "850715471371304960": {
+                "username": "SuperT",
+                "count": 1
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 2
+            },
+            "342581514757996558": {
+                "username": "SudharSteyn",
+                "count": 1
+            },
+            "839865506549858334": {
+                "username": "TRNR",
+                "count": 1
+            },
+            "974219852933898281": {
+                "username": "turmeric",
+                "count": 1
+            }
+        }
+    },
+    "27082026": {
+        "total_accepted": 78,
+        "new_participants": [],
+        "returning_users": [
+            "1463268059950354712",
+            "1185933859515273217",
+            "931403631062810644"
+        ],
+        "users": {
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 8
+            },
+            "839865506549858334": {
+                "username": "TRNR",
+                "count": 1
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 21
+            },
+            "768484574073454652": {
+                "username": "Iron knight",
+                "count": 1
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 13
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 17
+            },
+            "1463268059950354712": {
+                "username": "Pawan",
+                "count": 1
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 12
+            },
+            "850715471371304960": {
+                "username": "SuperT",
+                "count": 1
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 2
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 1
+            }
+        }
+    },
+    "28082026": {
+        "total_accepted": 135,
+        "new_participants": [],
+        "returning_users": [],
+        "users": {
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 8
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 45
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 19
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 3
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 19
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 38
+            },
+            "839865506549858334": {
+                "username": "TRNR",
+                "count": 2
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 1
+            }
+        }
+    },
+    "29082026": {
+        "total_accepted": 220,
+        "new_participants": [],
+        "returning_users": [
+            "1473544166335189133",
+            "336528534136946688",
+            "727879265764507719",
+            "780336732738551879"
+        ],
+        "users": {
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 13
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 4
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 97
+            },
+            "849318515298140192": {
+                "username": "tiso",
+                "count": 1
+            },
+            "1473544166335189133": {
+                "username": "Saikrishna",
+                "count": 1
+            },
+            "336528534136946688": {
+                "username": "k3v1nm0j0",
+                "count": 1
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 90
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 3
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 7
+            },
+            "727879265764507719": {
+                "username": "Farzi",
+                "count": 1
+            },
+            "780336732738551879": {
+                "username": "hi_pizza",
+                "count": 1
+            },
+            "1185933859515273217": {
+                "username": "Esoteric",
+                "count": 1
+            }
+        }
+    },
+    "30082026": {
+        "total_accepted": 58,
+        "new_participants": [],
+        "returning_users": [],
+        "users": {
+            "1197230845874933782": {
+                "username": "Dynamic v27.0 (Dev Beta v7.0)",
+                "count": 14
+            },
+            "1286606698240409631": {
+                "username": "Riyas",
+                "count": 7
+            },
+            "1275716495078330409": {
+                "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
+                "count": 13
+            },
+            "1405950424514564127": {
+                "username": "yaya",
+                "count": 17
+            },
+            "931403631062810644": {
+                "username": "DBZ",
+                "count": 1
+            },
+            "336528534136946688": {
+                "username": "k3v1nm0j0",
+                "count": 1
+            },
+            "692730575735357440": {
+                "username": "Sentient Alkyl",
+                "count": 4
+            },
+            "780336732738551879": {
+                "username": "hi_pizza",
                 "count": 1
             }
         }
