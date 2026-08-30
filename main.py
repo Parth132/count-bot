@@ -186,10 +186,10 @@ async def send_personal_milestone(message, user, previous_total_count, previous_
     announced_count_milestones = user.setdefault("announced_count_milestones", [])
     announced_streak_milestones = user.setdefault("announced_streak_milestones", [])
 
-    count_thresholds = [500, 1000, 5000, 10000]
+    count_thresholds = [1, 10, 50, 69, 100, 150, 200, 300, 400, 500, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 5000, 10000]
     crossed_count_thresholds = [
         threshold for threshold in count_thresholds
-        if previous_total_count < threshold <= current_total_count
+        if threshold == current_total_count
         and threshold not in announced_count_milestones
     ]
 
@@ -203,7 +203,7 @@ async def send_personal_milestone(message, user, previous_total_count, previous_
     streak_thresholds = [1, 5, 7, 10, 14, 21, 30, 45, 60, 69, 90, 100]
     crossed_streak_thresholds = [
         threshold for threshold in streak_thresholds
-        if previous_streak < threshold <= current_streak
+        if threshold == current_streak
         and threshold not in announced_streak_milestones
     ]
     # print(previous_streak,current_streak)
