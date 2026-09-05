@@ -2,6 +2,7 @@ import asyncio
 import os
 import traceback
 from datetime import datetime, timedelta
+from pathlib import Path
 from zoneinfo import ZoneInfo
 
 import discord
@@ -11,6 +12,7 @@ from dotenv import load_dotenv
 from helpers import config as config_helpers
 from helpers import counting as counting_helpers
 from helpers import stats as stats_helpers
+from helpers.logging import log_deleted_message
 from helpers.milestones import send_milestone
 
 load_dotenv()
@@ -20,6 +22,8 @@ DAILY_STATS_FILE = "daily_stats.json"
 CONFIG_FILE = "config.json"
 STATE_FILE = "count_state.json"
 STAT_FILE = "stat_count.json"
+DELETED_MESSAGE_LOG_PATH = Path(__file__).resolve().parent / "data" / "deleted_messages.jsonl"
+DELETION_METADATA: dict[int, dict[str, str]] = {}
 
 ALLOWED_ROLE_ID = 1377336728100012102
 ALLOWED_ROLE_ID_LIST = [924956391695863848,863827603701104690,1377336728100012102]
@@ -152,11 +156,22 @@ def check_permissions(roles):
         if role.id in ALLOWED_ROLE_ID_LIST:
             return True
     return False
-async def delete_message_safely(message):
+async def delete_message_safely(message, reason: str = "unknown", deletion_source: str = "bot_auto_delete"):
     try:
+        if message is not None and getattr(message, "id", None) is not None:
+            DELETION_METADATA[message.id] = {
+                "reason": reason or "unknown",
+                "deletion_source": deletion_source or "bot_auto_delete",
+            }
         await message.delete()
     except Exception as e:
-        print(f"Delete failed: {e}")
+        print(f"Delete failed: {type(e).__name__}: {e}")
+        log_deleted_message(
+            message,
+            reason=reason or "delete_failed",
+            deletion_source=f"{deletion_source}_failed",
+            path=DELETED_MESSAGE_LOG_PATH,
+        )
 
 
 def build_user_stats_embed(user, data):
@@ -676,24 +691,24 @@ async def on_message(message):
     ):
         if is_allowed_role:
             return
-        await delete_message_safely(message)
+        await delete_message_safely(message, reason="invalid_attachment_or_empty", deletion_source="bot_auto_delete")
         return
 
     # Must be integer
     if not content.isdigit():
         if is_allowed_role:
             return
-        await delete_message_safely(message)
+        await delete_message_safely(message, reason="wrong_number", deletion_source="bot_auto_delete")
         return
 
     # Same user twice
     if message.author.id == state["last_user_id"]:
-        await delete_message_safely(message)
+        await delete_message_safely(message, reason="same_user_twice", deletion_source="bot_auto_delete")
         return
 
     # Reject leading zeros
     if str(int(content)) != content:
-        await delete_message_safely(message)
+        await delete_message_safely(message, reason="leading_zero", deletion_source="bot_auto_delete")
         return
 
     number = int(content)
@@ -701,7 +716,7 @@ async def on_message(message):
     # Must be next number according to saved state
     print(number, state["last_number"])
     if number != state["last_number"] + 1:
-        await delete_message_safely(message)
+        await delete_message_safely(message, reason="wrong_number", deletion_source="bot_auto_delete")
         return
 
     # Valid count
@@ -766,10 +781,54 @@ async def on_message_edit(before, after):
         return
 
     try:
+        if after is not None and getattr(after, "id", None) is not None:
+            DELETION_METADATA[after.id] = {
+                "reason": "message_edited",
+                "deletion_source": "bot_auto_delete",
+            }
         await after.delete()
         print('a message was edited and has been deleted.')
     except Exception as e:
         print(f"Edit delete failed: {e}")
+
+
+@client.event
+async def on_message_delete(message):
+    if message is None:
+        return
+
+    if getattr(message.author, "bot", False):
+        return
+
+    if config.get("counting_channel_id", 0) == 0:
+        return
+
+    if message.channel is None or message.channel.id != config["counting_channel_id"]:
+        return
+
+    try:
+        metadata = DELETION_METADATA.pop(message.id, {})
+        reason = metadata.get("reason", "manual_delete")
+        deletion_source = metadata.get("deletion_source", "unknown_manual_delete")
+        bot_actor = None
+
+        if deletion_source == "bot_auto_delete":
+            bot_actor = {
+                "id": client.user.id if client.user else None,
+                "name": client.user.name if client.user else "counting-bot",
+                "display_name": client.user.display_name if client.user else "Counting Bot",
+            }
+
+        log_deleted_message(
+            message,
+            reason=reason,
+            deletion_source=deletion_source,
+            bot_actor=bot_actor,
+            path=DELETED_MESSAGE_LOG_PATH,
+        )
+    except Exception:
+        # Never allow the audit log to interrupt the bot lifecycle.
+        return
 
 
 client.run(TOKEN)
