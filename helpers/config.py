@@ -10,6 +10,7 @@ CONFIG_FILE = DATA_DIR / "config.json"
 STATE_FILE = DATA_DIR / "count_state.json"
 STAT_FILE = DATA_DIR / "stat_count.json"
 DAILY_STATS_FILE = DATA_DIR / "daily_stats.json"
+COUNT_BANS_FILE = DATA_DIR / "count_bans.json"
 
 
 def _resolve_path(path: str | os.PathLike[str] | None) -> Path:
@@ -105,3 +106,16 @@ def save_daily_stats(daily_stats: dict[str, Any], path: str | os.PathLike[str] |
         target = DAILY_STATS_FILE
 
     _write_json(target, daily_stats)
+
+
+def load_bans(path: str | os.PathLike[str] | None = None):
+    target = COUNT_BANS_FILE if path is None else Path(path)
+    if not target.exists():
+        return {}
+
+    return _read_json(target)
+
+
+def save_bans(bans: dict[str, Any], path: str | os.PathLike[str] | None = None) -> None:
+    target = COUNT_BANS_FILE if path is None else Path(path)
+    _write_json(target, bans)
