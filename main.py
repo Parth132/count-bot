@@ -1,7 +1,7 @@
 import asyncio
 import os
 import traceback
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -90,6 +90,7 @@ daily_stats = load_daily_stats()
 stats = load_stats()
 config = load_config()
 state = load_state()
+bans = config_helpers.load_bans()
 
 
 # ---------------------------
@@ -195,6 +196,45 @@ def check_permissions(roles):
     return stats_helpers.check_permissions(roles, ALLOWED_ROLE_ID_LIST)
 
 
+def prune_expired_bans() -> bool:
+    now = datetime.now(timezone.utc).timestamp()
+    expired_user_ids = []
+
+    for user_id, ban in bans.items():
+        try:
+            if float(ban["expires_at"]) <= now:
+                expired_user_ids.append(user_id)
+        except (KeyError, TypeError, ValueError):
+            expired_user_ids.append(user_id)
+
+    for user_id in expired_user_ids:
+        del bans[user_id]
+
+    if expired_user_ids:
+        config_helpers.save_bans(bans)
+
+    return bool(expired_user_ids)
+
+
+def get_active_ban(user_id: int):
+    user_id = str(user_id)
+    ban = bans.get(user_id)
+    if ban is None:
+        return None
+
+    try:
+        if float(ban["expires_at"]) <= datetime.now(timezone.utc).timestamp():
+            del bans[user_id]
+            config_helpers.save_bans(bans)
+            return None
+    except (KeyError, TypeError, ValueError):
+        del bans[user_id]
+        config_helpers.save_bans(bans)
+        return None
+
+    return ban
+
+
 
 async def send_personal_milestone(message, user, previous_total_count, previous_streak, current_total_count, current_streak):
     milestones = []
@@ -278,6 +318,7 @@ def build_daily_report_embed(
 @client.event
 async def on_ready():
     await tree.sync()
+    prune_expired_bans()
 
     print(f"Logged in as {client.user}")
     print(f"Counting channel: {config['counting_channel_id']}")
@@ -338,6 +379,52 @@ async def on_ready():
 # ----------------------------
 # Commands
 # ----------------------------
+
+# count-ban
+# ----------------------------
+
+@tree.command(
+    name="count-ban",
+    description="Stop a member from sending messages in the counting channel"
+)
+@app_commands.describe(
+    user="Member to ban from the counting channel",
+    minutes="How many minutes the ban should last"
+)
+async def count_ban(
+    interaction: discord.Interaction,
+    user: discord.Member,
+    minutes: app_commands.Range[int, 1, 43200],
+):
+    if not check_permissions(interaction.user.roles):
+        await interaction.response.send_message(
+            "❌ You do not have permission to use this command.",
+            ephemeral=True
+        )
+        return
+
+    if config["counting_channel_id"] == 0:
+        await interaction.response.send_message(
+            "❌ Counting channel is not configured.",
+            ephemeral=True
+        )
+        return
+
+    expires_at = datetime.now(timezone.utc).timestamp() + (minutes * 60)
+    bans[str(user.id)] = {
+        "expires_at": expires_at,
+        "banned_by": interaction.user.id,
+    }
+    config_helpers.save_bans(bans)
+
+    expiry_text = datetime.fromtimestamp(expires_at, timezone.utc).strftime(
+        "%Y-%m-%d %H:%M UTC"
+    )
+    await interaction.response.send_message(
+        f"✅ {user.mention} is banned from sending messages in the counting channel "
+        f"for **{minutes} minute(s)**, until **{expiry_text}**.",
+        ephemeral=True
+    )
 
 # set-counting-channel
 # ----------------------------
@@ -673,6 +760,22 @@ async def on_message(message):
         return
 
     if message.channel.id != channel_id:
+        return
+
+    active_ban = get_active_ban(message.author.id)
+    if active_ban is not None:
+        await delete_message_safely(
+            message,
+            reason="count_ban",
+            deletion_source="bot_auto_delete",
+        )
+        try:
+            await message.channel.send(
+                f"{message.author.mention}, you have been banned from sending messages "
+                "in this channel for the specified time interval."
+            )
+        except Exception as e:
+            print(f"Ban notice failed: {type(e).__name__}: {e}")
         return
 
     content = message.content.strip()
