@@ -1,19 +1,22 @@
 {
     "1197230845874933782": {
-        "username": "Dynamic v27.0 (Dev Beta v7.0)",
-        "total_count": 1348,
-        "last_active_date": "30 Aug 2026 04:16 PM",
-        "last_active_day": "2026-08-30",
-        "cur_streak": 64,
-        "max_streak": 64,
+        "username": "Dynamic v27.0 final stable build",
+        "total_count": 1560,
+        "last_active_date": "22 Sep 2026 07:47 PM",
+        "last_active_day": "2026-09-22",
+        "cur_streak": 87,
+        "max_streak": 87,
         "announced_count_milestones": [
             1100,
             1200,
-            1300
+            1300,
+            1400,
+            1500
         ],
         "announced_streak_milestones": [
             45,
-            60
+            60,
+            69
         ]
     },
     "793057265137090561": {
@@ -34,9 +37,9 @@
     },
     "1039518597757800448": {
         "username": "Slide Master",
-        "total_count": 64,
-        "last_active_date": "19 Aug 2026 12:27 PM",
-        "last_active_day": "2026-08-19",
+        "total_count": 66,
+        "last_active_date": "10 Sep 2026 09:50 AM",
+        "last_active_day": "2026-09-10",
         "cur_streak": 0,
         "max_streak": 7,
         "announced_count_milestones": [],
@@ -45,21 +48,25 @@
         ]
     },
     "1286606698240409631": {
-        "username": "Riyas",
-        "total_count": 1567,
-        "last_active_date": "30 Aug 2026 10:27 AM",
-        "last_active_day": "2026-08-30",
-        "cur_streak": 62,
-        "max_streak": 62,
+        "username": "Jim Milton",
+        "total_count": 1835,
+        "last_active_date": "22 Sep 2026 12:04 PM",
+        "last_active_day": "2026-09-22",
+        "cur_streak": 85,
+        "max_streak": 85,
         "announced_count_milestones": [
             1200,
             1300,
             1400,
-            1500
+            1500,
+            1600,
+            1700,
+            1800
         ],
         "announced_streak_milestones": [
             45,
-            60
+            60,
+            69
         ]
     },
     "1046664783946059808": {
@@ -80,36 +87,39 @@
     },
     "879416656525414451": {
         "username": "BILLU DA\u2122",
-        "total_count": 66,
-        "last_active_date": "23 Aug 2026 06:59 PM",
-        "last_active_day": "2026-08-23",
+        "total_count": 70,
+        "last_active_date": "08 Sep 2026 07:22 AM",
+        "last_active_day": "2026-09-08",
         "cur_streak": 0,
         "max_streak": 6,
-        "announced_count_milestones": [],
+        "announced_count_milestones": [
+            69
+        ],
         "announced_streak_milestones": [
             1
         ]
     },
     "1185933859515273217": {
         "username": "Esoteric",
-        "total_count": 107,
-        "last_active_date": "29 Aug 2026 11:10 PM",
-        "last_active_day": "2026-08-29",
-        "cur_streak": 3,
+        "total_count": 136,
+        "last_active_date": "22 Sep 2026 06:47 AM",
+        "last_active_day": "2026-09-22",
+        "cur_streak": 5,
         "max_streak": 27,
         "announced_count_milestones": [
             100
         ],
         "announced_streak_milestones": [
             1,
-            5
+            5,
+            7
         ]
     },
     "864499016888614972": {
         "username": "\u00c8l Profesor\u2122",
-        "total_count": 3,
-        "last_active_date": "03 Aug 2026 07:54 AM",
-        "last_active_day": "2026-08-03",
+        "total_count": 7,
+        "last_active_date": "07 Sep 2026 08:55 AM",
+        "last_active_day": "2026-09-07",
         "cur_streak": 0,
         "max_streak": 1,
         "announced_count_milestones": [],
@@ -119,13 +129,14 @@
     },
     "931403631062810644": {
         "username": "DBZ",
-        "total_count": 306,
-        "last_active_date": "30 Aug 2026 09:14 AM",
-        "last_active_day": "2026-08-30",
-        "cur_streak": 4,
-        "max_streak": 23,
+        "total_count": 429,
+        "last_active_date": "22 Sep 2026 06:58 PM",
+        "last_active_day": "2026-09-22",
+        "cur_streak": 27,
+        "max_streak": 27,
         "announced_count_milestones": [
-            300
+            300,
+            400
         ],
         "announced_streak_milestones": [
             14,
@@ -202,10 +213,10 @@
     },
     "336528534136946688": {
         "username": "k3v1nm0j0",
-        "total_count": 24,
-        "last_active_date": "30 Aug 2026 09:19 AM",
-        "last_active_day": "2026-08-30",
-        "cur_streak": 2,
+        "total_count": 27,
+        "last_active_date": "12 Sep 2026 09:50 AM",
+        "last_active_day": "2026-09-12",
+        "cur_streak": 0,
         "max_streak": 4,
         "announced_count_milestones": [],
         "announced_streak_milestones": [
@@ -214,9 +225,9 @@
     },
     "631429894680870922": {
         "username": "LJ28",
-        "total_count": 173,
-        "last_active_date": "20 Aug 2026 06:32 PM",
-        "last_active_day": "2026-08-20",
+        "total_count": 174,
+        "last_active_date": "30 Aug 2026 07:28 PM",
+        "last_active_day": "2026-08-30",
         "cur_streak": 0,
         "max_streak": 18,
         "announced_count_milestones": [
@@ -253,13 +264,14 @@
     },
     "1473544166335189133": {
         "username": "Saikrishna",
-        "total_count": 134,
-        "last_active_date": "29 Aug 2026 05:03 AM",
-        "last_active_day": "2026-08-29",
-        "cur_streak": 1,
+        "total_count": 159,
+        "last_active_date": "22 Sep 2026 09:59 AM",
+        "last_active_day": "2026-09-22",
+        "cur_streak": 7,
         "max_streak": 8,
         "announced_count_milestones": [
-            100
+            100,
+            150
         ],
         "announced_streak_milestones": [
             1,
@@ -269,10 +281,10 @@
     },
     "727879265764507719": {
         "username": "Farzi",
-        "total_count": 19,
-        "last_active_date": "29 Aug 2026 12:54 PM",
-        "last_active_day": "2026-08-29",
-        "cur_streak": 1,
+        "total_count": 20,
+        "last_active_date": "05 Sep 2026 11:50 AM",
+        "last_active_day": "2026-09-05",
+        "cur_streak": 0,
         "max_streak": 3,
         "announced_count_milestones": [],
         "announced_streak_milestones": [
@@ -297,11 +309,15 @@
     },
     "379619382113861642": {
         "username": "PapaDoom",
-        "total_count": 1,
-        "last_active_date": "02 Jul 2026 04:19 PM",
-        "last_active_day": "2026-07-02",
+        "total_count": 2,
+        "last_active_date": "07 Sep 2026 11:19 AM",
+        "last_active_day": "2026-09-07",
         "cur_streak": 0,
-        "max_streak": 1
+        "max_streak": 1,
+        "announced_count_milestones": [],
+        "announced_streak_milestones": [
+            1
+        ]
     },
     "456095275778310174": {
         "username": "Ronit",
@@ -409,9 +425,9 @@
     },
     "666239306414817292": {
         "username": "Marcoooo !!!",
-        "total_count": 36,
-        "last_active_date": "01 Aug 2026 01:54 PM",
-        "last_active_day": "2026-08-01",
+        "total_count": 37,
+        "last_active_date": "14 Sep 2026 09:31 AM",
+        "last_active_day": "2026-09-14",
         "cur_streak": 0,
         "max_streak": 4,
         "announced_count_milestones": [],
@@ -445,11 +461,15 @@
     },
     "927940428823683103": {
         "username": "BigDaddySnehal",
-        "total_count": 2,
-        "last_active_date": "31 Jul 2026 04:30 PM",
-        "last_active_day": "2026-07-31",
+        "total_count": 3,
+        "last_active_date": "04 Sep 2026 10:46 AM",
+        "last_active_day": "2026-09-04",
         "cur_streak": 0,
-        "max_streak": 1
+        "max_streak": 1,
+        "announced_count_milestones": [],
+        "announced_streak_milestones": [
+            1
+        ]
     },
     "403458892610404364": {
         "username": "Fred",
@@ -550,11 +570,15 @@
     },
     "461493254391857163": {
         "username": "anand",
-        "total_count": 1,
-        "last_active_date": "15 Jul 2026 12:35 AM IST",
-        "last_active_day": "2026-07-15",
+        "total_count": 3,
+        "last_active_date": "11 Sep 2026 05:12 PM",
+        "last_active_day": "2026-09-11",
         "cur_streak": 0,
-        "max_streak": 1
+        "max_streak": 1,
+        "announced_count_milestones": [],
+        "announced_streak_milestones": [
+            1
+        ]
     },
     "905361407757942804": {
         "username": "Viz TF",
@@ -574,16 +598,23 @@
     },
     "780336732738551879": {
         "username": "hi_pizza",
-        "total_count": 10,
-        "last_active_date": "30 Aug 2026 12:57 PM",
-        "last_active_day": "2026-08-30",
-        "cur_streak": 2,
-        "max_streak": 3,
+        "total_count": 69,
+        "last_active_date": "22 Sep 2026 07:41 PM",
+        "last_active_day": "2026-09-22",
+        "cur_streak": 25,
+        "max_streak": 25,
         "announced_count_milestones": [
-            10
+            10,
+            50,
+            69
         ],
         "announced_streak_milestones": [
-            1
+            1,
+            5,
+            7,
+            10,
+            14,
+            21
         ]
     },
     "1379063866977161286": {
@@ -616,11 +647,15 @@
     },
     "474982758213615617": {
         "username": "Not_CELL",
-        "total_count": 2,
-        "last_active_date": "21 Jul 2026 07:10 PM",
-        "last_active_day": "2026-07-21",
+        "total_count": 3,
+        "last_active_date": "14 Sep 2026 09:10 PM",
+        "last_active_day": "2026-09-14",
         "cur_streak": 0,
-        "max_streak": 1
+        "max_streak": 1,
+        "announced_count_milestones": [],
+        "announced_streak_milestones": [
+            1
+        ]
     },
     "584602238308188201": {
         "username": "Craniax",
@@ -648,21 +683,27 @@
     },
     "1405950424514564127": {
         "username": "yaya",
-        "total_count": 742,
-        "last_active_date": "30 Aug 2026 03:13 PM",
-        "last_active_day": "2026-08-30",
-        "cur_streak": 36,
-        "max_streak": 36,
+        "total_count": 1415,
+        "last_active_date": "22 Sep 2026 07:18 PM",
+        "last_active_day": "2026-09-22",
+        "cur_streak": 59,
+        "max_streak": 59,
         "announced_count_milestones": [
             300,
             400,
-            500
+            500,
+            1000,
+            1100,
+            1200,
+            1300,
+            1400
         ],
         "announced_streak_milestones": [
             1,
             14,
             21,
-            30
+            30,
+            45
         ]
     },
     "364081804535398411": {
@@ -675,11 +716,11 @@
     },
     "1275716495078330409": {
         "username": "\u0282\u03b1\u0271\u0282\u03c5\u0273\u0260",
-        "total_count": 1648,
-        "last_active_date": "30 Aug 2026 04:17 PM",
-        "last_active_day": "2026-08-30",
-        "cur_streak": 34,
-        "max_streak": 34,
+        "total_count": 2322,
+        "last_active_date": "22 Sep 2026 06:30 PM",
+        "last_active_day": "2026-09-22",
+        "cur_streak": 57,
+        "max_streak": 57,
         "announced_count_milestones": [
             1000,
             1100,
@@ -687,14 +728,19 @@
             1300,
             1400,
             1500,
-            1600
+            1600,
+            1700,
+            1800,
+            1900,
+            2000
         ],
         "announced_streak_milestones": [
             7,
             10,
             14,
             21,
-            30
+            30,
+            45
         ]
     },
     "829995164058648606": {
@@ -735,9 +781,9 @@
     },
     "850715471371304960": {
         "username": "SuperT",
-        "total_count": 3,
-        "last_active_date": "27 Aug 2026 01:19 PM",
-        "last_active_day": "2026-08-27",
+        "total_count": 6,
+        "last_active_date": "16 Sep 2026 03:48 PM",
+        "last_active_day": "2026-09-16",
         "cur_streak": 0,
         "max_streak": 2,
         "announced_count_milestones": [],
@@ -830,11 +876,11 @@
     },
     "858349381496471552": {
         "username": "ArthurMorganZzzZ",
-        "total_count": 1,
-        "last_active_date": "03 Aug 2026 07:04 PM",
-        "last_active_day": "2026-08-03",
+        "total_count": 3,
+        "last_active_date": "18 Sep 2026 02:54 PM",
+        "last_active_day": "2026-09-18",
         "cur_streak": 0,
-        "max_streak": 1,
+        "max_streak": 2,
         "announced_count_milestones": [],
         "announced_streak_milestones": [
             1
@@ -856,21 +902,25 @@
     },
     "692730575735357440": {
         "username": "Sentient Alkyl",
-        "total_count": 95,
-        "last_active_date": "30 Aug 2026 11:56 AM",
-        "last_active_day": "2026-08-30",
-        "cur_streak": 7,
-        "max_streak": 9,
+        "total_count": 202,
+        "last_active_date": "18 Sep 2026 03:29 PM",
+        "last_active_day": "2026-09-18",
+        "cur_streak": 0,
+        "max_streak": 13,
         "announced_count_milestones": [
             1,
             10,
             50,
-            69
+            69,
+            100,
+            150,
+            200
         ],
         "announced_streak_milestones": [
             1,
             5,
-            7
+            7,
+            10
         ]
     },
     "974219852933898281": {
@@ -917,9 +967,9 @@
     },
     "839865506549858334": {
         "username": "TRNR",
-        "total_count": 10,
-        "last_active_date": "28 Aug 2026 01:25 PM",
-        "last_active_day": "2026-08-28",
+        "total_count": 35,
+        "last_active_date": "03 Sep 2026 02:10 PM",
+        "last_active_day": "2026-09-03",
         "cur_streak": 0,
         "max_streak": 4,
         "announced_count_milestones": [
@@ -960,11 +1010,11 @@
     },
     "426538261717057566": {
         "username": "Dosaman",
-        "total_count": 1,
-        "last_active_date": "20 Aug 2026 08:09 AM",
-        "last_active_day": "2026-08-20",
+        "total_count": 6,
+        "last_active_date": "19 Sep 2026 07:47 AM",
+        "last_active_day": "2026-09-19",
         "cur_streak": 0,
-        "max_streak": 1,
+        "max_streak": 2,
         "announced_count_milestones": [
             1
         ],
@@ -1016,9 +1066,9 @@
     },
     "407919990973399061": {
         "username": "Max",
-        "total_count": 1,
-        "last_active_date": "22 Aug 2026 05:57 PM",
-        "last_active_day": "2026-08-22",
+        "total_count": 2,
+        "last_active_date": "04 Sep 2026 08:01 PM",
+        "last_active_day": "2026-09-04",
         "cur_streak": 0,
         "max_streak": 1,
         "announced_count_milestones": [
@@ -1103,6 +1153,465 @@
         "total_count": 1,
         "last_active_date": "29 Aug 2026 12:54 AM",
         "last_active_day": "2026-08-29",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "473490934378659850": {
+        "username": "gb",
+        "total_count": 58,
+        "last_active_date": "13 Sep 2026 05:18 AM",
+        "last_active_day": "2026-09-13",
+        "cur_streak": 0,
+        "max_streak": 8,
+        "announced_count_milestones": [
+            1,
+            10,
+            50
+        ],
+        "announced_streak_milestones": [
+            1,
+            5,
+            7
+        ]
+    },
+    "1211751558585520128": {
+        "username": "ERROR_404",
+        "total_count": 1,
+        "last_active_date": "31 Aug 2026 01:17 AM",
+        "last_active_day": "2026-08-31",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "1440422599535362140": {
+        "username": "Minorleather",
+        "total_count": 1,
+        "last_active_date": "31 Aug 2026 11:45 PM",
+        "last_active_day": "2026-08-31",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "1519398887129874572": {
+        "username": "Dynamic Counting Bot",
+        "total_count": 0,
+        "last_active_date": "",
+        "last_active_day": "",
+        "cur_streak": 0,
+        "max_streak": 0,
+        "announced_count_milestones": [],
+        "announced_streak_milestones": []
+    },
+    "1269580981069680674": {
+        "username": "Zagreus",
+        "total_count": 0,
+        "last_active_date": "",
+        "last_active_day": "",
+        "cur_streak": 0,
+        "max_streak": 0,
+        "announced_count_milestones": [],
+        "announced_streak_milestones": []
+    },
+    "1545182730696921109": {
+        "username": "Lucia",
+        "total_count": 1,
+        "last_active_date": "05 Sep 2026 12:01 AM",
+        "last_active_day": "2026-09-05",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "1209803151448866816": {
+        "username": "BayMax96",
+        "total_count": 4,
+        "last_active_date": "09 Sep 2026 10:39 PM",
+        "last_active_day": "2026-09-09",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "1173616464683618325": {
+        "username": "XNRIG",
+        "total_count": 1,
+        "last_active_date": "06 Sep 2026 09:04 PM",
+        "last_active_day": "2026-09-06",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "461258961560010844": {
+        "username": "Samarp30",
+        "total_count": 3,
+        "last_active_date": "18 Sep 2026 12:33 AM",
+        "last_active_day": "2026-09-18",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "1546917517459718213": {
+        "username": "Yodacycline",
+        "total_count": 1,
+        "last_active_date": "09 Sep 2026 10:45 PM",
+        "last_active_day": "2026-09-09",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "1058120075246313543": {
+        "username": "patanhi7002",
+        "total_count": 1,
+        "last_active_date": "10 Sep 2026 02:04 PM",
+        "last_active_day": "2026-09-10",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "1450520967083331604": {
+        "username": "Strok3",
+        "total_count": 8,
+        "last_active_date": "16 Sep 2026 01:03 PM",
+        "last_active_day": "2026-09-16",
+        "cur_streak": 0,
+        "max_streak": 3,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "301786125687717888": {
+        "username": "R0gU3",
+        "total_count": 1,
+        "last_active_date": "11 Sep 2026 07:00 PM",
+        "last_active_day": "2026-09-11",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "756474120962572290": {
+        "username": "Deep",
+        "total_count": 1,
+        "last_active_date": "12 Sep 2026 03:09 PM",
+        "last_active_day": "2026-09-12",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "1003691701786919022": {
+        "username": "ar59",
+        "total_count": 2,
+        "last_active_date": "12 Sep 2026 09:49 PM",
+        "last_active_day": "2026-09-12",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "560731775488491520": {
+        "username": "Magneto",
+        "total_count": 2,
+        "last_active_date": "22 Sep 2026 12:21 PM",
+        "last_active_day": "2026-09-22",
+        "cur_streak": 1,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "1206300916764901396": {
+        "username": "Kuns07",
+        "total_count": 1,
+        "last_active_date": "13 Sep 2026 06:19 PM",
+        "last_active_day": "2026-09-13",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "349543778912174100": {
+        "username": "MrMonkey",
+        "total_count": 1,
+        "last_active_date": "14 Sep 2026 04:26 AM",
+        "last_active_day": "2026-09-14",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "638989429171683350": {
+        "username": "Casper",
+        "total_count": 1,
+        "last_active_date": "14 Sep 2026 08:37 AM",
+        "last_active_day": "2026-09-14",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "884576868626464768": {
+        "username": "Nyx",
+        "total_count": 1,
+        "last_active_date": "14 Sep 2026 12:14 PM",
+        "last_active_day": "2026-09-14",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "756581455857057934": {
+        "username": "Sharky",
+        "total_count": 3,
+        "last_active_date": "17 Sep 2026 11:21 AM",
+        "last_active_day": "2026-09-17",
+        "cur_streak": 0,
+        "max_streak": 3,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "924144515000987648": {
+        "username": "flame990",
+        "total_count": 1,
+        "last_active_date": "15 Sep 2026 10:18 AM",
+        "last_active_day": "2026-09-15",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "719918053680480318": {
+        "username": "mrttheboss",
+        "total_count": 1,
+        "last_active_date": "16 Sep 2026 04:17 PM",
+        "last_active_day": "2026-09-16",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "788654889063415828": {
+        "username": "Kris",
+        "total_count": 1,
+        "last_active_date": "16 Sep 2026 05:17 PM",
+        "last_active_day": "2026-09-16",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "1054352373792903228": {
+        "username": "Harsh Modi",
+        "total_count": 24,
+        "last_active_date": "22 Sep 2026 07:23 PM",
+        "last_active_day": "2026-09-22",
+        "cur_streak": 2,
+        "max_streak": 2,
+        "announced_count_milestones": [
+            1,
+            10
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "114666062078935046": {
+        "username": "Blitz",
+        "total_count": 1,
+        "last_active_date": "18 Sep 2026 05:32 AM",
+        "last_active_day": "2026-09-18",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "1410134896831365200": {
+        "username": "Aarya",
+        "total_count": 1,
+        "last_active_date": "19 Sep 2026 06:50 PM",
+        "last_active_day": "2026-09-19",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "416144342407708682": {
+        "username": "R1ddler",
+        "total_count": 1,
+        "last_active_date": "19 Sep 2026 09:41 PM",
+        "last_active_day": "2026-09-19",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "523233807806234624": {
+        "username": "JUSTYNCHAOS",
+        "total_count": 3,
+        "last_active_date": "20 Sep 2026 09:07 PM",
+        "last_active_day": "2026-09-20",
+        "cur_streak": 0,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "393098244449894401": {
+        "username": "FujiSama",
+        "total_count": 3,
+        "last_active_date": "22 Sep 2026 10:20 AM",
+        "last_active_day": "2026-09-22",
+        "cur_streak": 1,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "401558133622833163": {
+        "username": "MUKUL :/",
+        "total_count": 1,
+        "last_active_date": "21 Sep 2026 08:51 AM",
+        "last_active_day": "2026-09-21",
+        "cur_streak": 1,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "575958955327619083": {
+        "username": "manthan",
+        "total_count": 1,
+        "last_active_date": "22 Sep 2026 04:12 PM",
+        "last_active_day": "2026-09-22",
+        "cur_streak": 1,
+        "max_streak": 1,
+        "announced_count_milestones": [
+            1
+        ],
+        "announced_streak_milestones": [
+            1
+        ]
+    },
+    "516148797009821697": {
+        "username": "kira_shiv",
+        "total_count": 1,
+        "last_active_date": "22 Sep 2026 04:19 PM",
+        "last_active_day": "2026-09-22",
         "cur_streak": 1,
         "max_streak": 1,
         "announced_count_milestones": [
