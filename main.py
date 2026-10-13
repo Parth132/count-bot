@@ -1,7 +1,7 @@
 import asyncio
 import os
 import traceback
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -97,7 +97,7 @@ bans = config_helpers.load_bans()
 # Helper Functions
 # ---------------------------
 
-def refresh_user_streak(user: dict, today_date: datetime.date | None = None) -> bool:
+def refresh_user_streak(user: dict, today_date: date | None = None) -> bool:
     if not user.get("last_active_day"):
         return False
 
@@ -122,7 +122,7 @@ def refresh_user_streak(user: dict, today_date: datetime.date | None = None) -> 
     return False
 
 
-def refresh_streaks_for_all_users(today_date: datetime.date | None = None) -> None:
+def refresh_streaks_for_all_users(today_date: date | None = None) -> None:
     if today_date is None:
         today_date = datetime.now(ZoneInfo("Asia/Kolkata")).date()
 
